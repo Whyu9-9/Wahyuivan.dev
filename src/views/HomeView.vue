@@ -11,11 +11,11 @@ import Experience from "../components/Experience.vue";
     <div
         class="too-small-min:hidden h-screen flex flex-col justify-center items-center p-7"
     >
-        <h1 class="text-2xl font-sans font-bold text-center">
+        <div class="text-2xl font-sans font-bold text-center">
             Sorry, this website is
             <span class="text-one-dark-red">not optimized</span> for your device
             🥲
-        </h1>
+        </div>
     </div>
     <div
         class="too-small-max:hidden sm:pt-20 max-w-screen-lg mx-auto p-16 relative"
