@@ -20,4 +20,13 @@ const router = createRouter({
     routes,
 });
 
+router.afterEach((to) => {
+    // This is where we send page views to Google Analytics
+    if (window.gtag) {
+        window.gtag('config', import.meta.env.VITE_GA_ID, {
+            page_path: to.fullPath,
+        });
+    }
+});
+
 export default router;
