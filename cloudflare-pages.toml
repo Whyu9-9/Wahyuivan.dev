@@ -1,0 +1,9 @@
+# Cloudflare Pages Configuration File
+
+name = "wahyuivan-dev"
+
+# Redirects
+[[redirects]]
+  from = "www.wahyuivan.dev/*"
+  to = "https://wahyuivan.dev/:splat"
+  status = 301

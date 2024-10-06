@@ -3,6 +3,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router' // Import the router
+import gtag from 'vue-gtag';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -14,4 +15,9 @@ library.add(faGithub, faLinkedin, faInstagram, faTiktok, faMedium, faYoutube, fa
 const app = createApp(App)
 app.use(router) // Use the router
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(gtag, {
+  property: {
+    id: import.meta.env.VITE_GA_ID,
+  },
+})
 app.mount('#app')
