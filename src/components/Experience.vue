@@ -81,14 +81,14 @@ const experiences = ref([
             "Working on the QA team to ensure the quality of the software products.",
     },
     {
-        title: "Software Engineer",
+        title: "Software Engineer - Fullstack",
         company: "Taksu Tech",
         period: "Aug 2023 - Oct 2024",
         description:
             "Working on various software projects, including web development, mobile app development, and backend development.",
     },
     {
-        title: "Software Engineer",
+        title: "Software Engineer - FE",
         company: "Incentro",
         period: "Oct 2024 - Present",
         description:
