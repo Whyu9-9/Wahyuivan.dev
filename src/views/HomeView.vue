@@ -7,9 +7,10 @@ import Blogs from "../components/Blogs.vue";
 import Project from "../components/Project.vue";
 import Experience from "../components/Experience.vue";
 </script>
-
 <template>
-    <div class="too-small-min:hidden w-full h-full mx-auto my-52 p-10">
+    <div
+        class="too-small-min:hidden h-screen flex flex-col justify-center items-center p-7"
+    >
         <h1 class="text-2xl font-sans font-bold text-center">
             Sorry, this website is
             <span class="text-one-dark-red">not optimized</span> for your device

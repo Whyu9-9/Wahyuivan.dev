@@ -7,6 +7,7 @@
             v-for="blog in fetchedJson.slice(0, 4)"
             :href="blog.link"
             target="_blank"
+            rel="noopener noreferrer"
             class="flex flex-col px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
         >
             <!-- Blog Image (always on top) -->

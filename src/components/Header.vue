@@ -10,6 +10,7 @@
                 <a
                     href="https://www.youtube.com/@wahyuivan9"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="underline"
                     >tech content creator</a
                 >
@@ -28,6 +29,7 @@
                     <a
                         :href="`https://taksu.tech`"
                         target="_blank"
+                        rel="noopener noreferrer"
                         class="font-black underline"
                         >PT. Taksu Teknologi Indonesia</a
                     >
@@ -65,6 +67,7 @@
                     :href="link"
                     :alt="key"
                     target="_blank"
+                    rel="noopener noreferrer"
                     ><font-awesome-icon :icon="['fab', key]"
                 /></a>
             </div>
@@ -85,6 +88,7 @@
                 <a
                     href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="bg-one-dark-gray text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72"
                 >
                     <font-awesome-icon :icon="['fas', 'download']" />
@@ -113,7 +117,6 @@ const socials = ref({
 const connectWebSocket = () => {
     ws.value = new WebSocket("wss://api.lanyard.rest/socket");
     ws.value.onopen = () => {
-        console.log("WebSocket connection established.");
         ws.value.send(
             JSON.stringify({
                 op: 2,
@@ -147,11 +150,11 @@ const connectWebSocket = () => {
             }
 
             ws.value.onerror = (error) => {
-                console.error("WebSocket error: ", error);
+                throw new Error(error);
             };
 
             ws.value.onclose = () => {
-                console.log("WebSocket connection closed.");
+                throw new Error("WebSocket connection closed.");
             };
         }
     };

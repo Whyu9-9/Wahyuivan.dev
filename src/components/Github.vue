@@ -7,6 +7,7 @@
             v-for="repo in repos"
             :href="repo.html_url"
             target="_blank"
+            rel="noopener noreferrer"
             class="flex flex-col justify-between px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
         >
             <div>
