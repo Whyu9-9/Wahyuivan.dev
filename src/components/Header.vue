@@ -63,6 +63,7 @@
                     v-for="(link, key) in socials"
                     :key="key"
                     :href="link"
+                    :alt="key"
                     target="_blank"
                     ><font-awesome-icon :icon="['fab', key]"
                 /></a>

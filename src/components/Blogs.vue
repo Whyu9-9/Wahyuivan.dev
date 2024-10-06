@@ -14,6 +14,7 @@
                 <img
                     :src="getBlogImage(blog) || profileImage"
                     class="rounded w-full lg:h-32 h-full object-contain lg:object-cover"
+                    :alt="blog.title"
                 />
             </div>
 
