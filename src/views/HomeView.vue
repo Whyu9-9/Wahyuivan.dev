@@ -1,12 +1,3 @@
-<script setup>
-import Header from "../components/Header.vue";
-import Tools from "../components/Tools.vue";
-import Github from "../components/Github.vue";
-import Footer from "../components/Footer.vue";
-import Blogs from "../components/Blogs.vue";
-import Project from "../components/Project.vue";
-import Experience from "../components/Experience.vue";
-</script>
 <template>
     <div
         class="too-small-min:hidden h-screen flex flex-col justify-center items-center p-7"
@@ -59,3 +50,12 @@ import Experience from "../components/Experience.vue";
         <Footer />
     </div>
 </template>
+<script setup>
+import Header from "../components/Header.vue";
+import Tools from "../components/Tools.vue";
+import Github from "../components/Github.vue";
+import Footer from "../components/Footer.vue";
+import Blogs from "../components/Blogs.vue";
+import Project from "../components/Project.vue";
+import Experience from "../components/Experience.vue";
+</script>

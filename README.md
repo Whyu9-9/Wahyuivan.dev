@@ -2,7 +2,7 @@
 
 # wahyuivan.dev
 
-🌐 My personal website.
+🌐 My personal website, updated with Vue 3 and Tailwind CSS.
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ cd wahyuivan.dev
 3. Install the dependencies:
 
 ```bash
-npm ci
+npm install
 ```
 
 4. Start the development server:
@@ -33,4 +33,3 @@ npm run dev
 ```
 
 Done! You have successfully run the website locally.
-# wahyuivan.dev
