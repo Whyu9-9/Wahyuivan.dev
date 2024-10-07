@@ -7,41 +7,21 @@
             <div class="mt-3 mb-3 text-md md:text-justify">
                 I'm a passionate {{ new Date().getFullYear() - 1999 }}-years-old
                 full-time software engineer by day,
-                <a
-                    href="https://www.youtube.com/@wahyuivan9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="underline"
-                    >tech content creator</a
-                >
+                <a href="https://www.youtube.com/@wahyuivan9" target="_blank" rel="noopener noreferrer"
+                    class="underline">tech content creator</a>
                 by night, and a full-time tech enthusiast living in Bali,
                 Indonesia 🇮🇩 🌴
             </div>
-            <div
-                class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify"
-            >
-                <font-awesome-icon
-                    :icon="['fas', 'laptop-code']"
-                    class="w-5 h-5 mr-1"
-                />
+            <div class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify">
+                <font-awesome-icon :icon="['fas', 'laptop-code']" class="w-5 h-5 mr-1" />
                 <div>
                     I'm currently working at
-                    <a
-                        :href="`https://taksu.tech`"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="font-black underline"
-                        >PT. Taksu Teknologi Indonesia</a
-                    >
+                    <a :href="`https://taksu.tech`" target="_blank" rel="noopener noreferrer"
+                        class="font-black underline">PT. Taksu Teknologi Indonesia</a>
                 </div>
             </div>
-            <div
-                class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify"
-            >
-                <font-awesome-icon
-                    :icon="['fas', 'code']"
-                    class="w-5 h-5 mr-1"
-                />
+            <div class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify">
+                <font-awesome-icon :icon="['fas', 'code']" class="w-5 h-5 mr-1" />
                 <div v-if="vscode">
                     Currently diving into code since:
                     <span class="font-black">{{
@@ -61,36 +41,22 @@
                 <div v-else>I'm not working on anything right now.</div>
             </div>
             <div class="flex gap-3 mt-7 text-lg md:gap-5 md:mx-0">
-                <a
-                    v-for="(link, key) in socials"
-                    :key="key"
-                    :href="link"
-                    :alt="key"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    ><font-awesome-icon :icon="['fab', key]"
-                /></a>
+                <a v-for="(link, key) in socials" :key="key" :href="link" :alt="key" target="_blank"
+                    rel="noopener noreferrer"><font-awesome-icon :icon="['fab', key]" /></a>
             </div>
         </div>
         <div class="relative group">
             <!-- Profile Image -->
-            <img
-                src="/src/assets/profile.png"
-                class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
-                alt="Profile Picture"
-            />
+            <img src="/src/assets/profile.png" class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
+                alt="Profile Picture" />
 
             <!-- Overlay (hidden by default, appears on hover) -->
             <div
-                class="text-sm absolute inset-0 bg-one-dark-bg bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
+                class="text-sm absolute inset-0 bg-one-dark-bg bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <!-- See CV Button -->
-                <a
-                    href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="bg-one-dark-gray text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72"
-                >
+                <a href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    class="bg-one-dark-gray text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72">
                     <font-awesome-icon :icon="['fas', 'download']" />
                     Download CV
                 </a>
@@ -131,7 +97,7 @@ const connectWebSocket = () => {
             const presence = data.d;
 
             vscode.value = presence.activities.find(
-                (activity) => activity.name === "VSCode"
+                (activity) => activity.name.toLowerCase().includes("code")
             );
 
             switch (presence.discord_status) {
