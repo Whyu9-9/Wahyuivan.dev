@@ -12,12 +12,15 @@
                 class="flex flex-col justify-between px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
             >
                 <div>
-                    <div class="flex items-center gap-2 text-one-dark-gray">
+                    <div
+                        class="flex items-center gap-2 text-one-dark-foreground"
+                    >
                         <img
                             :src="repo.owner.avatar_url"
-                            class="rounded-full w-4"
+                            class="rounded-full w-4 h-4"
                             alt="github-profile"
                             fetchpriority="low"
+                            loading="lazy"
                             as="image"
                         />
                         {{ repo.owner.login }}
@@ -36,7 +39,7 @@
                             repo.name
                         }}
                     </div>
-                    <div class="text-xs text-one-dark-gray">
+                    <div class="text-xs text-one-dark-foreground">
                         {{ repo.description }}
                     </div>
                 </div>

@@ -34,13 +34,14 @@
 
                     <!-- Author, Published Date and Profile Image -->
                     <div
-                        class="flex items-center gap-2 text-one-dark-gray mb-3"
+                        class="flex items-center gap-2 text-one-dark-foreground mb-3"
                     >
                         <img
                             :src="profileImage"
                             class="rounded-full w-7 h-7"
                             alt="medium-profile"
                             fetchpriority="low"
+                            loading="lazy"
                             as="image"
                         />
                         <span class="truncate font-sans text-xs">

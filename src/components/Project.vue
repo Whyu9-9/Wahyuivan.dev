@@ -22,6 +22,7 @@
                         :alt="`Slide ${index + 1}`"
                         class="w-full h-64 object-cover cursor-pointer"
                         fetchpriority="low"
+                        loading="lazy"
                         as="image"
                     />
 
@@ -67,6 +68,7 @@
                     :alt="selectedSlide.title"
                     class="w-full h-96 object-scale-down px-3"
                     fetchpriority="low"
+                    loading="lazy"
                     as="image"
                 />
             </div>

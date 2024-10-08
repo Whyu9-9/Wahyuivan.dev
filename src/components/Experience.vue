@@ -6,7 +6,7 @@
         >
             <!-- Vertical snake line -->
             <div
-                class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-foreground top-0 hidden md:block"
+                class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-gray top-0 hidden md:block"
             ></div>
 
             <div
@@ -28,7 +28,7 @@
                             class="text-xs text-one-dark-foreground font-sans md:text-sm"
                         >
                             <a
-                                class="text-one-dark-blue"
+                                class="text-one-dark-blue font-bold"
                                 :href="experience.companyWebsite"
                                 rel="noopener noreferrer"
                                 >{{ experience.company }}</a
@@ -36,7 +36,7 @@
                             {{ experience.period }}
                         </p>
                         <p
-                            class="mt-2 text-one-dark-gray text-xs hidden md:block"
+                            class="mt-2 text-one-dark-foreground text-xs hidden md:block"
                         >
                             {{ experience.description }}
                         </p>
@@ -69,14 +69,14 @@
                             class="text-xs text-one-dark-foreground font-sans md:text-sm"
                         >
                             <a
-                                class="text-one-dark-blue"
+                                class="text-one-dark-blue font-bold"
                                 :href="experience.companyWebsite"
                                 rel="noopener noreferrer"
                                 >{{ experience.company }}</a
                             >, {{ experience.period }}
                         </p>
                         <p
-                            class="mt-2 text-one-dark-gray text-xs hidden md:block"
+                            class="mt-2 text-one-dark-foreground text-xs hidden md:block"
                         >
                             {{ experience.description }}
                         </p>

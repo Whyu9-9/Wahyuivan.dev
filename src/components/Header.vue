@@ -18,7 +18,7 @@
                 Indonesia 🇮🇩 🌴
             </div>
             <div
-                class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify"
+                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify"
             >
                 <font-awesome-icon
                     :icon="['fas', 'laptop-code']"
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div
-                class="flex items-center gap-2 text-sm text-one-dark-gray mt-3 md:text-justify"
+                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify"
             >
                 <font-awesome-icon
                     :icon="['fas', 'code']"
@@ -109,7 +109,7 @@
                     href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="bg-one-dark-gray text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72"
+                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72"
                 >
                     <font-awesome-icon :icon="['fas', 'download']" />
                     Download CV
@@ -122,7 +122,7 @@
 import { ref, onMounted, onUnmounted, computed } from "vue";
 
 const ws = ref(null);
-const status = ref("text-one-dark-gray");
+const status = ref("text-one-dark-foreground");
 const vscode = ref(null);
 const socials = {
     Github: "https://github.com/Whyu9-9",
@@ -165,7 +165,7 @@ const connectWebSocket = () => {
                     status.value = "text-one-dark-red";
                     break;
                 case "offline":
-                    status.value = "text-one-dark-gray";
+                    status.value = "text-one-dark-foreground";
                     break;
             }
 
