@@ -137,49 +137,72 @@ const socials = {
 };
 
 const connectWebSocket = () => {
-    ws.value = new WebSocket("wss://api.lanyard.rest/socket");
-    ws.value.onopen = () => {
-        ws.value.send(
-            JSON.stringify({
-                op: 2,
-                d: { subscribe_to_id: import.meta.env.VITE_DISCORD_ID },
-            })
-        );
-    };
+    try {
+        ws.value = new WebSocket("wss://api.lanyard.rest/socket");
 
-    ws.value.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.t === "INIT_STATE" || data.t === "PRESENCE_UPDATE") {
-            const presence = data.d;
-
-            vscode.value = presence.activities.find((activity) =>
-                activity.name.toLowerCase().includes("code")
-            );
-
-            switch (presence.discord_status) {
-                case "online":
-                    status.value = "text-one-dark-green";
-                    break;
-                case "idle":
-                    status.value = "text-one-dark-yellow";
-                    break;
-                case "dnd":
-                    status.value = "text-one-dark-red";
-                    break;
-                case "offline":
-                    status.value = "text-one-dark-foreground";
-                    break;
+        ws.value.onopen = () => {
+            try {
+                ws.value.send(
+                    JSON.stringify({
+                        op: 2,
+                        d: { subscribe_to_id: import.meta.env.VITE_DISCORD_ID },
+                    })
+                );
+            } catch (sendError) {
+                console.error(
+                    "Error sending message via WebSocket:",
+                    sendError
+                );
             }
+        };
 
-            ws.value.onerror = (error) => {
-                console.error("WebSocket Error:", error);
-            };
+        ws.value.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
 
-            ws.value.onclose = () => {
-                console.log("WebSocket connection closed.");
-            };
-        }
-    };
+                if (data.t === "INIT_STATE" || data.t === "PRESENCE_UPDATE") {
+                    const presence = data.d;
+
+                    vscode.value = presence.activities.find((activity) =>
+                        activity.name.toLowerCase().includes("code")
+                    );
+
+                    switch (presence.discord_status) {
+                        case "online":
+                            status.value = "text-one-dark-green";
+                            break;
+                        case "idle":
+                            status.value = "text-one-dark-yellow";
+                            break;
+                        case "dnd":
+                            status.value = "text-one-dark-red";
+                            break;
+                        case "offline":
+                            status.value = "text-one-dark-foreground";
+                            break;
+                    }
+                }
+            } catch (messageError) {
+                console.error(
+                    "Error handling WebSocket message:",
+                    messageError
+                );
+            }
+        };
+
+        ws.value.onerror = (error) => {
+            console.error("WebSocket Error:", error);
+        };
+
+        ws.value.onclose = () => {
+            console.log("WebSocket connection closed.");
+        };
+    } catch (connectionError) {
+        console.error(
+            "Error establishing WebSocket connection:",
+            connectionError
+        );
+    }
 };
 
 onMounted(async () => {
