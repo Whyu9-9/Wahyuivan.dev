@@ -49,7 +49,7 @@
                     :class="`w-2 h-2 rounded-full cursor-pointer ${
                         index === currentSlide
                             ? 'bg-one-dark-green'
-                            : 'bg-one-dark-white'
+                            : 'bg-one-dark-gray'
                     }`"
                     class="hidden md:block"
                 ></span>
