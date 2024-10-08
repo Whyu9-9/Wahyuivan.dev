@@ -75,7 +75,7 @@
         <div class="relative group">
             <!-- Profile Image -->
             <img
-                src="https://wahyuivan.dev/profile.webp"
+                src="https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/profile.webp"
                 class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
                 alt="Profile Picture"
             />
