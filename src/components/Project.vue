@@ -1,69 +1,71 @@
 <template>
-    <h2 class="mb-3 font-black text-2xl">~/projects/</h2>
-    <div class="relative w-full">
-        <!-- Carousel Items -->
-        <div
-            class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]"
-            @touchstart="onTouchStart"
-            @touchmove="onTouchMove"
-            @touchend="onTouchEnd"
-        >
+    <div>
+        <h2 class="mb-3 font-black text-2xl">~/projects/</h2>
+        <div class="relative w-full">
+            <!-- Carousel Items -->
             <div
-                v-for="(slide, index) in slides"
-                :key="index"
-                :class="`carousel-item flex w-full relative ${
-                    index === currentSlide ? '' : 'hidden'
-                }`"
-                @click="openModal(slide)"
+                class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]"
+                @touchstart="onTouchStart"
+                @touchmove="onTouchMove"
+                @touchend="onTouchEnd"
             >
-                <img
-                    :src="slide.src"
-                    :alt="`Slide ${index + 1}`"
-                    class="w-full h-64 object-cover cursor-pointer"
-                />
-
-                <!-- Overlay -->
                 <div
-                    class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-one-dark-bg via-one-dark-bg/70 to-transparent backdrop-blur-[2px]"
+                    v-for="(slide, index) in slides"
+                    :key="index"
+                    :class="`carousel-item flex w-full relative ${
+                        index === currentSlide ? '' : 'hidden'
+                    }`"
+                    @click="openModal(slide)"
                 >
-                    <h3 class="text-xl font-bold font-sans md:text-2xl">
-                        {{ slide.title }}
-                    </h3>
-                    <p class="text-xs text-one-dark-white md:text-sm">
-                        {{ slide.desc }}
-                    </p>
+                    <img
+                        :src="slide.src"
+                        :alt="`Slide ${index + 1}`"
+                        class="w-full h-64 object-cover cursor-pointer"
+                    />
+
+                    <!-- Overlay -->
+                    <div
+                        class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-one-dark-bg via-one-dark-bg/70 to-transparent backdrop-blur-[2px]"
+                    >
+                        <h3 class="text-xl font-bold font-sans md:text-2xl">
+                            {{ slide.title }}
+                        </h3>
+                        <p class="text-xs text-one-dark-white md:text-sm">
+                            {{ slide.desc }}
+                        </p>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Indicators -->
+            <div class="indicators flex justify-center space-x-2 mt-4">
+                <span
+                    v-for="(slide, index) in slides"
+                    :key="index"
+                    @click="goToSlide(index)"
+                    :class="`w-2 h-2 rounded-full cursor-pointer ${
+                        index === currentSlide
+                            ? 'bg-one-dark-green'
+                            : 'bg-one-dark-white'
+                    }`"
+                    class="hidden md:block"
+                ></span>
             </div>
         </div>
 
-        <!-- Indicators -->
-        <div class="indicators flex justify-center space-x-2 mt-4">
-            <span
-                v-for="(slide, index) in slides"
-                :key="index"
-                @click="goToSlide(index)"
-                :class="`w-2 h-2 rounded-full cursor-pointer ${
-                    index === currentSlide
-                        ? 'bg-one-dark-green'
-                        : 'bg-one-dark-white'
-                }`"
-                class="hidden md:block"
-            ></span>
-        </div>
-    </div>
-
-    <!-- Modal for larger image -->
-    <div
-        v-if="isModalOpen"
-        class="fixed inset-0 z-50 bg-one-dark-bg bg-opacity-80 backdrop-blur-md flex justify-center items-center"
-        @click.self="closeModal"
-    >
-        <div class="relative">
-            <img
-                :src="selectedSlide.src"
-                :alt="selectedSlide.title"
-                class="w-full h-96 object-scale-down px-3"
-            />
+        <!-- Modal for larger image -->
+        <div
+            v-if="isModalOpen"
+            class="fixed inset-0 z-50 bg-one-dark-bg bg-opacity-80 backdrop-blur-md flex justify-center items-center"
+            @click.self="closeModal"
+        >
+            <div class="relative">
+                <img
+                    :src="selectedSlide.src"
+                    :alt="selectedSlide.title"
+                    class="w-full h-96 object-scale-down px-3"
+                />
+            </div>
         </div>
     </div>
 </template>

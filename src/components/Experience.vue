@@ -1,74 +1,86 @@
 <template>
-    <h2 class="mb-3 font-black text-2xl">~/experiences/</h2>
-    <div
-        class="mx-auto py-10 relative bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm pt-9 px-5 pb-0 overflow-hidden"
-    >
-        <!-- Vertical snake line -->
+    <div>
+        <h2 class="mb-3 font-black text-2xl">~/experiences/</h2>
         <div
-            class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-foreground top-0 hidden md:block"
-        ></div>
-
-        <div
-            v-for="(experience, index) in experiences.slice().reverse()"
-            :key="index"
+            class="mx-auto py-10 relative bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm pt-9 px-5 pb-0 overflow-hidden"
         >
-            <!-- Odd Index - Timeline Item Right -->
+            <!-- Vertical snake line -->
             <div
-                v-if="index % 2 === 0"
-                class="mb-8 flex items-center justify-start md:mb-14"
-            >
-                <div class="w-full md:w-1/2 text-left pl-6 pr-6 md:text-right">
-                    <h3 class="font-bold text-2xl font-sans">
-                        {{ experience.title }}
-                    </h3>
-                    <p
-                        class="text-xs text-one-dark-foreground font-sans md:text-sm"
-                    >
-                        <a
-                            class="text-one-dark-blue"
-                            :href="experience.companyWebsite"
-                            rel="noopener noreferrer"
-                            >{{ experience.company }}</a
-                        >,
-                        {{ experience.period }}
-                    </p>
-                    <p class="mt-2 text-one-dark-gray text-xs">
-                        {{ experience.description }}
-                    </p>
-                </div>
-                <div
-                    :class="
-                        index !== 0 ? 'bg-one-dark-red' : 'bg-one-dark-green'
-                    "
-                    class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4"
-                ></div>
-            </div>
+                class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-foreground top-0 hidden md:block"
+            ></div>
 
-            <!-- Even Index - Timeline Item Left -->
-            <div v-else class="mb-8 flex items-center justify-end md:mb-14">
+            <div
+                v-for="(experience, index) in experiences.slice().reverse()"
+                :key="index"
+            >
+                <!-- Odd Index - Timeline Item Right -->
                 <div
-                    :class="
-                        index !== 0 ? 'bg-one-dark-red' : 'bg-one-dark-green'
-                    "
-                    class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"
-                ></div>
-                <div class="w-full md:w-1/2 text-left pl-6 pr-6">
-                    <h3 class="font-bold text-xl font-sans">
-                        {{ experience.title }}
-                    </h3>
-                    <p
-                        class="text-xs text-one-dark-foreground font-sans md:text-sm"
+                    v-if="index % 2 === 0"
+                    class="mb-8 flex items-center justify-start md:mb-14"
+                >
+                    <div
+                        class="w-full md:w-1/2 text-left pl-6 pr-6 md:text-right"
                     >
-                        <a
-                            class="text-one-dark-blue"
-                            :href="experience.companyWebsite"
-                            rel="noopener noreferrer"
-                            >{{ experience.company }}</a
-                        >, {{ experience.period }}
-                    </p>
-                    <p class="mt-2 text-one-dark-gray text-xs">
-                        {{ experience.description }}
-                    </p>
+                        <h3 class="font-bold text-2xl font-sans">
+                            {{ experience.title }}
+                        </h3>
+                        <p
+                            class="text-xs text-one-dark-foreground font-sans md:text-sm"
+                        >
+                            <a
+                                class="text-one-dark-blue"
+                                :href="experience.companyWebsite"
+                                rel="noopener noreferrer"
+                                >{{ experience.company }}</a
+                            >,
+                            {{ experience.period }}
+                        </p>
+                        <p
+                            class="mt-2 text-one-dark-gray text-xs hidden md:block"
+                        >
+                            {{ experience.description }}
+                        </p>
+                    </div>
+                    <div
+                        :class="
+                            index !== 0
+                                ? 'bg-one-dark-red'
+                                : 'bg-one-dark-green'
+                        "
+                        class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4"
+                    ></div>
+                </div>
+
+                <!-- Even Index - Timeline Item Left -->
+                <div v-else class="mb-8 flex items-center justify-end md:mb-14">
+                    <div
+                        :class="
+                            index !== 0
+                                ? 'bg-one-dark-red'
+                                : 'bg-one-dark-green'
+                        "
+                        class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"
+                    ></div>
+                    <div class="w-full md:w-1/2 text-left pl-6 pr-6">
+                        <h3 class="font-bold text-xl font-sans">
+                            {{ experience.title }}
+                        </h3>
+                        <p
+                            class="text-xs text-one-dark-foreground font-sans md:text-sm"
+                        >
+                            <a
+                                class="text-one-dark-blue"
+                                :href="experience.companyWebsite"
+                                rel="noopener noreferrer"
+                                >{{ experience.company }}</a
+                            >, {{ experience.period }}
+                        </p>
+                        <p
+                            class="mt-2 text-one-dark-gray text-xs hidden md:block"
+                        >
+                            {{ experience.description }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

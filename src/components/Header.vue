@@ -71,13 +71,21 @@
                     class="relative group"
                 >
                     <!-- Font Awesome Icon -->
-                    <font-awesome-icon :icon="['fab', key]" />
+                    <font-awesome-icon
+                        :icon="[
+                            'fab',
+                            key === 'X' ? 'x-twitter' : key.toLowerCase(),
+                        ]"
+                    />
 
                     <!-- Tooltip -->
                     <span
-                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        class="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-xs font-medium text-one-dark-bg bg-one-dark-foreground rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg"
                     >
                         {{ key }}
+                        <span
+                            class="absolute w-2 h-2 bg-one-dark-foreground rotate-45 transform -translate-x-1/2 left-1/2 bottom-full -mb-1"
+                        ></span>
                     </span>
                 </a>
             </div>
@@ -115,13 +123,13 @@ const ws = ref(null);
 const status = ref("text-one-dark-gray");
 const vscode = ref(null);
 const socials = {
-    github: "https://github.com/Whyu9-9",
-    linkedin: "https://www.linkedin.com/in/wahyuivan",
-    tiktok: "https://www.tiktok.com/@wahyuivanmahendra",
-    instagram: "https://www.instagram.com/why.u9",
-    youtube: "https://www.youtube.com/@wahyuivan9",
-    medium: "https://medium.com/@wahyuivan",
-    "x-twitter": "https://twitter.com/ivanwahyu195",
+    Github: "https://github.com/Whyu9-9",
+    Linkedin: "https://www.linkedin.com/in/wahyuivan",
+    Tiktok: "https://www.tiktok.com/@wahyuivanmahendra",
+    Instagram: "https://www.instagram.com/why.u9",
+    Youtube: "https://www.youtube.com/@wahyuivan9",
+    Medium: "https://medium.com/@wahyuivan",
+    X: "https://twitter.com/ivanwahyu195",
 };
 
 const connectWebSocket = () => {
