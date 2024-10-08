@@ -68,7 +68,6 @@
                     :alt="selectedSlide.title"
                     class="w-full h-96 object-scale-down px-3"
                     fetchpriority="low"
-                    loading="lazy"
                     as="image"
                 />
             </div>
