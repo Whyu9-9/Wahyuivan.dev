@@ -1,6 +1,17 @@
 <template>
     <div>
         <h2 class="mb-3 font-black text-2xl">~/repositories/</h2>
+        <div
+            class="relative flex justify-center items-center bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg mb-4 overflow-scroll p-5 w-full"
+        >
+            <i
+                class="devicon-github-plain absolute top-2 left-2 text-2xl m-3"
+            ></i>
+            <ActivityCalendarWidget
+                :data="convertedData"
+                :daysToRender="daysToRender"
+            />
+        </div>
         <div class="grid md:grid-cols-2 gap-4">
             <div v-if="!repos.length">Github repos could not be retrieved.</div>
             <a
@@ -65,7 +76,8 @@
     </div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch, onUnmounted } from "vue";
+import ActivityCalendarWidget from "activity-calendar-widget/vue";
 
 const projects = [
     "MyGram-API",
@@ -74,8 +86,50 @@ const projects = [
     "ChromeBuiltInAISimpleDemo",
 ];
 const repos = ref([]);
+const contributions = ref([]);
+const convertedData = ref([]);
+
+const daysToRender = ref(300); // Default value
+
+const updateDaysToRender = () => {
+    const width = window.innerWidth;
+
+    if (width < 640) {
+        // Small screens
+        daysToRender.value = 70; // Show fewer days
+    } else if (width < 768) {
+        // Medium screens
+        daysToRender.value = 200; // Show moderate days
+    } else if (width < 1024) {
+        // Large screens
+        daysToRender.value = 250; // Show more days
+    } else {
+        daysToRender.value = 300; // Default value for larger screens
+    }
+};
 
 onMounted(async () => {
+    // Initial call
+    updateDaysToRender();
+
+    // Update daysToRender on resize
+    window.addEventListener("resize", updateDaysToRender);
+
+    await fetch(
+        "https://github-contributions-api.jogruber.de/v4/Whyu9-9?y=last"
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            contributions.value = data.contributions;
+
+            // Convert the fetched data to match ActivityCalendarWidget format
+            convertedData.value = contributions.value.map((contribution) => {
+                return {
+                    date: contribution.date,
+                    activities: Array(contribution.count).fill({}),
+                };
+            });
+        });
     await fetch("https://api.github.com/users/Whyu9-9/repos?per_page=999")
         .then((response) => response.json())
         .then((data) => {
@@ -88,5 +142,12 @@ onMounted(async () => {
         .catch(() => {
             return;
         });
+});
+
+watch(() => window.innerWidth, updateDaysToRender); // Watch for window width changes
+
+// Clean up the event listener on component unmount
+onUnmounted(() => {
+    window.removeEventListener("resize", updateDaysToRender);
 });
 </script>

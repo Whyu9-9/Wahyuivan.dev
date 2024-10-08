@@ -43,7 +43,7 @@
         </div>
         <div class="relative mb-10"><Blogs /></div>
         <div
-            class="z-0 bottom-[33rem] left-0 absolute mb-5 ml-3 text-[9rem] opacity-10 select-none lg:block hidden"
+            class="z-0 bottom-[46rem] left-0 absolute mb-5 ml-3 text-[9rem] opacity-10 select-none lg:block hidden"
         >
             📕
         </div>
