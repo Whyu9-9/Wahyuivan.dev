@@ -9,7 +9,7 @@
                 @touchmove="onTouchMove"
                 @touchend="onTouchEnd"
             >
-                <lazy-component
+                <div
                     v-for="(slide, index) in slides"
                     :key="index"
                     :class="`carousel-item flex w-full relative ${
@@ -18,7 +18,7 @@
                     @click="openModal(slide)"
                 >
                     <img
-                        :src="slide.src"
+                        v-lazy="slide.src"
                         :alt="`Slide ${index + 1}`"
                         class="w-full h-64 object-cover cursor-pointer"
                     />
@@ -34,7 +34,7 @@
                             {{ slide.desc }}
                         </p>
                     </div>
-                </lazy-component>
+                </div>
             </div>
 
             <!-- Indicators -->
