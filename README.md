@@ -1,4 +1,4 @@
-![](./public/screenshot.png)
+![](https://wahyuivan.dev/screenshot.webp)
 
 # wahyuivan.dev
 

@@ -74,32 +74,32 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 // Carousel data with titles and descriptions
 const slides = ref([
     {
-        src: "https://lh3.googleusercontent.com/d/1YU5nfcoII1DyWBG6tKnsJXD6eRhCraA2",
+        src: "https://wahyuivan.dev/Picture1.webp",
         title: "Alengkong Bali Camp",
         desc: "An interactive website to ease up user booking process for Alengkong Bali Camp.",
     },
     {
-        src: "https://lh3.googleusercontent.com/d/1CmuqXTpL1Gmyn0YMoUwXRAWPz6ZekYTk",
+        src: "https://wahyuivan.dev/Picture2.webp",
         title: "Claudia Fitness",
         desc: "An admin dashboard for Claudia Fitness to manage clients, orders, and payments.",
     },
     {
-        src: "https://lh3.googleusercontent.com/d/1J9pN-M_zxay_926_tkwryl-ExAIeyTE4",
+        src: "https://wahyuivan.dev/Picture3.webp",
         title: "MyTISI Gobolabali",
         desc: "An admin dashboard for MyTISI Gobolabali to manage players, teams, and matches.",
     },
     {
-        src: "https://lh3.googleusercontent.com/d/1N-GdbjGh2V1cdvckkncGcP_ppeuliRVl",
+        src: "https://wahyuivan.dev/Picture4.webp",
         title: "PT. Pancoran Mas",
         desc: "An admin dashboard for PT. Pancoran Mas to manage LPG sales and inventory.",
     },
     {
-        src: "https://lh3.googleusercontent.com/d/1CiHbe6gHdwJZK35rDh3a9v1KPz_PyNBR",
+        src: "https://wahyuivan.dev/Picture5.webp",
         title: "ASDP Indonesia Ferry",
         desc: "An admin dashboard for ASDP Indonesia Ferry to manage blog posts and comments.",
     },
     {
-        src: "https://lh3.googleusercontent.com/d/1tyWrbQ1nY-6fjt4pjYgRMW0Ik4w0KQpK",
+        src: "https://wahyuivan.dev/Screenshot%202024-10-06%20at%2010.11.37.webp",
         title: "Chrome Built-in AI",
         desc: "An experimental Chrome feature to use AI directly in the browser.",
     },
