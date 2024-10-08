@@ -12,13 +12,14 @@
                 class="flex flex-col px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
             >
                 <!-- Blog Image (always on top) -->
-                <div class="flex-shrink-0 w-full mb-3">
+                <div
+                    v-lazy-container="{ selector: 'img' }"
+                    class="flex-shrink-0 w-full mb-3"
+                >
                     <img
-                        :src="getBlogImage(blog) || profileImage"
+                        :data-src="getBlogImage(blog) || profileImage"
                         class="rounded w-full lg:h-32 h-full object-contain lg:object-cover"
                         :alt="blog.title"
-                        fetchpriority="high"
-                        as="image"
                     />
                 </div>
 
@@ -34,15 +35,13 @@
 
                     <!-- Author, Published Date and Profile Image -->
                     <div
+                        v-lazy-container="{ selector: 'img' }"
                         class="flex items-center gap-2 text-one-dark-foreground mb-3"
                     >
                         <img
-                            :src="profileImage"
+                            :data-src="profileImage"
                             class="rounded-full w-7 h-7"
                             alt="medium-profile"
-                            fetchpriority="low"
-                            loading="lazy"
-                            as="image"
                         />
                         <span class="truncate font-sans text-xs">
                             {{ blog.author }}

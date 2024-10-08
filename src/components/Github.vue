@@ -13,10 +13,11 @@
             >
                 <div>
                     <div
+                        v-lazy-container="{ selector: 'img' }"
                         class="flex items-center gap-2 text-one-dark-foreground"
                     >
                         <img
-                            :src="repo.owner.avatar_url"
+                            :data-src="repo.owner.avatar_url"
                             class="rounded-full w-4 h-4"
                             alt="github-profile"
                             fetchpriority="low"

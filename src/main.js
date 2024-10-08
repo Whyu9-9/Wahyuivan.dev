@@ -6,6 +6,7 @@ import router from './router';
 import gtag from 'vue-gtag';
 import 'devicon/devicon.min.css';
 import './assets/bg.css';
+import VueLazyload from 'vue-lazyload'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -18,6 +19,7 @@ const app = createApp(App)
 
 app.use(router) // Use the router
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(VueLazyload)
 app.use(gtag, {
   property: {
     id: import.meta.env.VITE_GA_ID,

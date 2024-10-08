@@ -10,6 +10,7 @@
                 @touchend="onTouchEnd"
             >
                 <div
+                    v-lazy-container="{ selector: 'img' }"
                     v-for="(slide, index) in slides"
                     :key="index"
                     :class="`carousel-item flex w-full relative ${
@@ -18,7 +19,7 @@
                     @click="openModal(slide)"
                 >
                     <img
-                        :src="slide.src"
+                        :data-src="slide.src"
                         :alt="`Slide ${index + 1}`"
                         class="w-full h-64 object-cover cursor-pointer"
                     />
@@ -59,9 +60,9 @@
             class="fixed inset-0 z-50 bg-one-dark-bg bg-opacity-80 backdrop-blur-md flex justify-center items-center"
             @click.self="closeModal"
         >
-            <div class="relative">
+            <div v-lazy-container="{ selector: 'img' }" class="relative">
                 <img
-                    :src="selectedSlide.src"
+                    :data-src="selectedSlide.src"
                     :alt="selectedSlide.title"
                     class="w-full h-96 object-scale-down px-3"
                     fetchpriority="low"

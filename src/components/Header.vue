@@ -92,13 +92,15 @@
         </div>
         <div class="relative group">
             <!-- Profile Image -->
-            <img
-                src="https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/profile.webp"
-                class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
-                alt="Profile Picture"
-                fetchpriority="high"
-                as="image"
-            />
+            <div v-lazy-container="{ selector: 'img' }">
+                <img
+                    data-src="https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/profile.webp"
+                    class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
+                    alt="Profile Picture"
+                    fetchpriority="high"
+                    as="image"
+                />
+            </div>
 
             <!-- Overlay (hidden by default, appears on hover) -->
             <div
