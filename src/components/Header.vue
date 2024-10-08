@@ -169,8 +169,12 @@ const connectWebSocket = () => {
                     break;
             }
 
+            ws.value.onerror = (error) => {
+                console.error("WebSocket Error:", error);
+            };
+
             ws.value.onclose = () => {
-                throw new Error("WebSocket connection closed.");
+                console.log("WebSocket connection closed.");
             };
         }
     };
