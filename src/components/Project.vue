@@ -82,9 +82,9 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 // Carousel data with titles and descriptions
 const slides = ref([
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture1.webp",
-        title: "Alengkong Bali Camp",
-        desc: "An interactive website to ease up user booking process for Alengkong Bali Camp.",
+        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Screenshot%202024-10-06%20at%2010.11.37.webp",
+        title: "Chrome Built-in AI",
+        desc: "An experimental Chrome feature to use AI directly in the browser.",
     },
     {
         src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture2.webp",
@@ -107,9 +107,9 @@ const slides = ref([
         desc: "An admin dashboard for ASDP Indonesia Ferry to manage blog posts and comments.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Screenshot%202024-10-06%20at%2010.11.37.webp",
-        title: "Chrome Built-in AI",
-        desc: "An experimental Chrome feature to use AI directly in the browser.",
+        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture1.webp",
+        title: "Alengkong Bali Camp",
+        desc: "An interactive website to ease up user booking process for Alengkong Bali Camp.",
     },
 ]);
 
