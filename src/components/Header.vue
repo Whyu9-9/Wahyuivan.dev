@@ -60,7 +60,7 @@
                 </div>
                 <div v-else>I'm not working on anything right now.</div>
             </div>
-            <div class="flex gap-3 mt-7 text-lg md:gap-5 md:mx-0">
+            <div class="flex gap-4 mt-8 text-xl md:gap-5 md:mx-0">
                 <a
                     v-for="(link, key) in socials"
                     :key="key"
@@ -68,8 +68,18 @@
                     :alt="key"
                     target="_blank"
                     rel="noopener noreferrer"
-                    ><font-awesome-icon :icon="['fab', key]"
-                /></a>
+                    class="relative group"
+                >
+                    <!-- Font Awesome Icon -->
+                    <font-awesome-icon :icon="['fab', key]" />
+
+                    <!-- Tooltip -->
+                    <span
+                        class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs font-medium text-white bg-gray-700 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    >
+                        {{ key }}
+                    </span>
+                </a>
             </div>
         </div>
         <div class="relative group">
@@ -104,7 +114,7 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 const ws = ref(null);
 const status = ref("text-one-dark-gray");
 const vscode = ref(null);
-const socials = ref({
+const socials = {
     github: "https://github.com/Whyu9-9",
     linkedin: "https://www.linkedin.com/in/wahyuivan",
     tiktok: "https://www.tiktok.com/@wahyuivanmahendra",
@@ -112,7 +122,7 @@ const socials = ref({
     youtube: "https://www.youtube.com/@wahyuivan9",
     medium: "https://medium.com/@wahyuivan",
     "x-twitter": "https://twitter.com/ivanwahyu195",
-});
+};
 
 const connectWebSocket = () => {
     ws.value = new WebSocket("wss://api.lanyard.rest/socket");

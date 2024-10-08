@@ -28,7 +28,7 @@
                         repo.archived ? 'line-through' : '',
                     ]"
                 >
-                    {{ repo.name }}
+                    <i class="devicon-github-plain"></i>&nbsp;{{ repo.name }}
                 </div>
                 <div class="text-xs text-one-dark-gray">
                     {{ repo.description }}
@@ -36,11 +36,17 @@
             </div>
             <div class="flex mt-5 gap-5">
                 <div>
-                    <font-awesome-icon :icon="['fas', 'star']" />
+                    <font-awesome-icon
+                        :icon="['fas', 'star']"
+                        style="color: gold"
+                    />
                     {{ repo.stargazers_count }}
                 </div>
                 <div>
-                    <font-awesome-icon :icon="['fas', 'code-branch']" />
+                    <font-awesome-icon
+                        :icon="['fas', 'code-branch']"
+                        class="text-one-dark-orange"
+                    />
                     {{ repo.forks_count }}
                 </div>
             </div>

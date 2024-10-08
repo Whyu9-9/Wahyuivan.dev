@@ -5,7 +5,7 @@
     >
         <!-- Vertical snake line -->
         <div
-            class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-blue top-0 hidden md:block"
+            class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-foreground top-0 hidden md:block"
         ></div>
 
         <div
@@ -17,16 +17,22 @@
                 v-if="index % 2 === 0"
                 class="mb-8 flex items-center justify-start md:mb-14"
             >
-                <div
-                    class="w-full md:w-1/2 text-left pl-6 md:pr-6 md:text-right"
-                >
+                <div class="w-full md:w-1/2 text-left pl-6 pr-6 md:text-right">
                     <h3 class="font-bold text-2xl font-sans">
                         {{ experience.title }}
                     </h3>
-                    <p class="text-sm text-one-dark-white font-sans">
-                        {{ experience.company }}, {{ experience.period }}
+                    <p
+                        class="text-xs text-one-dark-foreground font-sans md:text-sm"
+                    >
+                        <a
+                            class="text-one-dark-blue"
+                            :href="experience.companyWebsite"
+                            rel="noopener noreferrer"
+                            >{{ experience.company }}</a
+                        >,
+                        {{ experience.period }}
                     </p>
-                    <p class="mt-2 text-one-dark-foreground text-xs">
+                    <p class="mt-2 text-one-dark-gray text-xs">
                         {{ experience.description }}
                     </p>
                 </div>
@@ -46,14 +52,21 @@
                     "
                     class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"
                 ></div>
-                <div class="w-full md:w-1/2 text-left pl-6">
-                    <h3 class="font-bold text-2xl font-sans">
+                <div class="w-full md:w-1/2 text-left pl-6 pr-6">
+                    <h3 class="font-bold text-xl font-sans">
                         {{ experience.title }}
                     </h3>
-                    <p class="text-sm text-one-dark-white font-sans">
-                        {{ experience.company }}, {{ experience.period }}
+                    <p
+                        class="text-xs text-one-dark-foreground font-sans md:text-sm"
+                    >
+                        <a
+                            class="text-one-dark-blue"
+                            :href="experience.companyWebsite"
+                            rel="noopener noreferrer"
+                            >{{ experience.company }}</a
+                        >, {{ experience.period }}
                     </p>
-                    <p class="mt-2 text-one-dark-foreground text-xs">
+                    <p class="mt-2 text-one-dark-gray text-xs">
                         {{ experience.description }}
                     </p>
                 </div>
@@ -65,13 +78,14 @@
 <script setup>
 import { ref } from "vue";
 
-const experiences = ref([
+const experiences = [
     {
         title: "Backend Web Developer Intern",
         company: "Timedoor Indonesia",
         period: "Aug 2021 - Jan 2022",
         description:
             "Working on the backend of a web application for managing project tasks and collaboration.",
+        companyWebsite: "https://timedoor.net/",
     },
     {
         title: "Quality Assurance Engineer",
@@ -79,6 +93,7 @@ const experiences = ref([
         period: "Apr 2022 - Aug 2023",
         description:
             "Working on the QA team to ensure the quality of the software products.",
+        companyWebsite: "https://djoin.id/",
     },
     {
         title: "Software Engineer - Fullstack",
@@ -86,13 +101,15 @@ const experiences = ref([
         period: "Aug 2023 - Oct 2024",
         description:
             "Working on various software projects, including web development, mobile app development, and backend development.",
+        companyWebsite: "https://taksu.tech/",
     },
     {
         title: "Software Engineer - FE",
         company: "Incentro",
-        period: "Oct 2024 - Present",
+        period: "Nov 2024 - Present",
         description:
             "Developing web applications for large-scale projects, focusing on user experience and performance.",
+        companyWebsite: "https://www.incentro.com/en",
     },
-]);
+];
 </script>

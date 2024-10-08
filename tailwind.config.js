@@ -28,11 +28,11 @@ export default {
     extend: {
       screens: {
         'too-small-min': {
-          'min': '320px'
+          'min': '340px'
         },
         'too-small-max': {
-          'max': '320px'
-        },
+          'max': '340px'
+        }
       },
     },
   },
