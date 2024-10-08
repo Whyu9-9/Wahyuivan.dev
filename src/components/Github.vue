@@ -16,6 +16,9 @@
                         <img
                             :src="repo.owner.avatar_url"
                             class="rounded-full w-4"
+                            alt="github-profile"
+                            fetchpriority="low"
+                            as="image"
                         />
                         {{ repo.owner.login }}
                     </div>

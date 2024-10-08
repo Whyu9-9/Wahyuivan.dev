@@ -21,6 +21,8 @@
                         :src="slide.src"
                         :alt="`Slide ${index + 1}`"
                         class="w-full h-64 object-cover cursor-pointer"
+                        fetchpriority="low"
+                        as="image"
                     />
 
                     <!-- Overlay -->
@@ -64,6 +66,8 @@
                     :src="selectedSlide.src"
                     :alt="selectedSlide.title"
                     class="w-full h-96 object-scale-down px-3"
+                    fetchpriority="low"
+                    as="image"
                 />
             </div>
         </div>

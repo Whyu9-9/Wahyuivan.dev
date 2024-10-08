@@ -17,6 +17,8 @@
                         :src="getBlogImage(blog) || profileImage"
                         class="rounded w-full lg:h-32 h-full object-contain lg:object-cover"
                         :alt="blog.title"
+                        fetchpriority="high"
+                        as="image"
                     />
                 </div>
 
@@ -34,7 +36,13 @@
                     <div
                         class="flex items-center gap-2 text-one-dark-gray mb-3"
                     >
-                        <img :src="profileImage" class="rounded-full w-7 h-7" />
+                        <img
+                            :src="profileImage"
+                            class="rounded-full w-7 h-7"
+                            alt="medium-profile"
+                            fetchpriority="low"
+                            as="image"
+                        />
                         <span class="truncate font-sans text-xs">
                             {{ blog.author }}
                             <br />
