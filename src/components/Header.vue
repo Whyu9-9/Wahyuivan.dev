@@ -95,7 +95,7 @@
             <div v-lazy-container="{ selector: 'img' }">
                 <img
                     data-src="https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/profile.webp"
-                    class="md:w-72 lg:h-80 rounded my-10 mx-auto w-full h-96 object-cover"
+                    class="w-72 lg:h-80 rounded my-10 mx-auto h-80 object-cover border-[#e5c07b] border-[0.5px]"
                     alt="Profile Picture"
                     fetchpriority="high"
                     as="image"
@@ -111,7 +111,7 @@
                     href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-52 mt-72"
+                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-60 mt-56"
                 >
                     <font-awesome-icon :icon="['fas', 'download']" />
                     Download CV
