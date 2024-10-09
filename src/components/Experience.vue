@@ -25,16 +25,16 @@
                         </p>
                     </div>
                     <div :class="index !== 0
-                            ? 'bg-one-dark-red'
-                            : 'bg-one-dark-green'
+                        ? 'bg-one-dark-red'
+                        : 'bg-one-dark-green'
                         " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4"></div>
                 </div>
 
                 <!-- Even Index - Timeline Item Left -->
                 <div v-else class="mb-8 flex items-center justify-end md:mb-14">
                     <div :class="index !== 0
-                            ? 'bg-one-dark-red'
-                            : 'bg-one-dark-green'
+                        ? 'bg-one-dark-red'
+                        : 'bg-one-dark-green'
                         " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"></div>
                     <div class="w-full md:w-1/2 text-left pl-6 pr-6">
                         <h3 class="font-bold text-xl font-sans">
@@ -82,13 +82,13 @@ const experiences = [
             "Working on various software projects, including web development, mobile app development, and backend development.",
         companyWebsite: "https://taksu.tech/",
     },
-    // {
-    //     title: "Software Engineer - FE",
-    //     company: "Incentro",
-    //     period: "Nov 2024 - Present",
-    //     description:
-    //         "Developing web applications for large-scale projects, focusing on user experience and performance.",
-    //     companyWebsite: "https://www.incentro.com/en",
-    // },
+    {
+        title: "Software Engineer - FE",
+        company: "Incentro",
+        period: "Start Nov 2024",
+        description:
+            "Soon will contribute to developing web applications for various scale projects, focusing on user experience and performance.",
+        companyWebsite: "https://www.incentro.com/en",
+    },
 ];
 </script>
