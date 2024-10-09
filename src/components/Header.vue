@@ -60,7 +60,7 @@
                 </div>
                 <div v-else>I'm not working on anything right now.</div>
             </div>
-            <div class="flex gap-4 mt-8 text-xl md:gap-5 md:mx-0">
+            <div class="flex gap-4 mt-8 text-xl mc:text-2xl md:gap-5 md:mx-0">
                 <a
                     v-for="(link, key) in socials"
                     :key="key"
@@ -95,7 +95,7 @@
             <div v-lazy-container="{ selector: 'img' }">
                 <img
                     data-src="https://storage.wahyuivan.dev/profile.webp"
-                    class="w-72 lg:h-80 rounded my-10 mx-auto h-80 object-cover border-[#e5c07b] border-[0.5px] hidden md:block"
+                    class="w-72 lg:h-80 rounded my-10 mx-auto h-96 object-cover border-[#e5c07b] border-[0.5px] hidden md:block"
                     alt="Profile Picture"
                     fetchpriority="high"
                     as="image"

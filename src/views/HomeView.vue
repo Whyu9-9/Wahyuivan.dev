@@ -23,13 +23,13 @@
             🚀
         </div>
         <div class="relative mb-10"><Header /></div>
-        <div class="mb-10"><Project /></div>
+        <div class="mb-10"><Tools /></div>
         <div
             class="z-0 right-0 top-[47rem] md:bottom-[80rem] absolute mb-10 ml-7 text-[7rem] opacity-10 select-none lg:block hidden"
         >
             👨‍💻
         </div>
-        <div class="mb-10"><Tools /></div>
+        <div class="mb-10"><Project /></div>
         <div
             class="z-0 right-0 top-[114rem] md:bottom-[80rem] absolute mb-10 mr-7 text-[7rem] opacity-15 select-none lg:block hidden"
         >
