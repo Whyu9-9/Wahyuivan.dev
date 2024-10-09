@@ -1,4 +1,4 @@
-![](https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/screenshot.webp)
+![](https://storage.wahyuivan.dev/screenshot.webp)
 
 # wahyuivan.dev
 

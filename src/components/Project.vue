@@ -3,30 +3,16 @@
         <h2 class="mb-3 font-black text-2xl">~/projects/</h2>
         <div class="relative w-full">
             <!-- Carousel Items -->
-            <div
-                class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]"
-                @touchstart="onTouchStart"
-                @touchmove="onTouchMove"
-                @touchend="onTouchEnd"
-            >
-                <div
-                    v-for="(slide, index) in slides"
-                    :key="index"
-                    :class="`carousel-item flex w-full relative ${
-                        index === currentSlide ? '' : 'hidden'
-                    }`"
-                    @click="openModal(slide)"
-                >
-                    <img
-                        v-lazy="slide.src"
-                        :alt="`Slide ${index + 1}`"
-                        class="w-full h-64 object-cover cursor-pointer"
-                    />
+            <div class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]" @touchstart="onTouchStart"
+                @touchmove="onTouchMove" @touchend="onTouchEnd">
+                <div v-for="(slide, index) in slides" :key="index" :class="`carousel-item flex w-full relative ${index === currentSlide ? '' : 'hidden'
+                    }`" @click="openModal(slide)">
+                    <img v-lazy="slide.src" :alt="`Slide ${index + 1}`"
+                        class="w-full h-64 object-cover cursor-pointer" />
 
                     <!-- Overlay -->
                     <div
-                        class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-one-dark-bg via-one-dark-bg/70 to-transparent backdrop-blur-[2px]"
-                    >
+                        class="absolute bottom-0 w-full p-4 bg-gradient-to-t from-one-dark-bg via-one-dark-bg/70 to-transparent backdrop-blur-[2px]">
                         <h3 class="text-xl font-bold font-sans md:text-2xl">
                             {{ slide.title }}
                         </h3>
@@ -39,34 +25,20 @@
 
             <!-- Indicators -->
             <div class="indicators flex justify-center space-x-2 mt-4">
-                <span
-                    v-for="(slide, index) in slides"
-                    :key="index"
-                    @click="goToSlide(index)"
-                    :class="`w-2 h-2 rounded-full cursor-pointer ${
-                        index === currentSlide
-                            ? 'bg-one-dark-green'
-                            : 'bg-one-dark-gray'
-                    }`"
-                    class="hidden md:block"
-                ></span>
+                <span v-for="(slide, index) in slides" :key="index" @click="goToSlide(index)" :class="`w-2 h-2 rounded-full cursor-pointer ${index === currentSlide
+                        ? 'bg-one-dark-green'
+                        : 'bg-one-dark-gray'
+                    }`" class="hidden md:block"></span>
             </div>
         </div>
 
         <!-- Modal for larger image -->
-        <div
-            v-if="isModalOpen"
+        <div v-if="isModalOpen"
             class="fixed inset-0 z-50 bg-one-dark-bg bg-opacity-80 backdrop-blur-md flex justify-center items-center"
-            @click.self="closeModal"
-        >
+            @click.self="closeModal">
             <div v-lazy-container="{ selector: 'img' }" class="relative">
-                <img
-                    :data-src="selectedSlide.src"
-                    :alt="selectedSlide.title"
-                    class="w-full h-96 object-scale-down px-3"
-                    fetchpriority="low"
-                    as="image"
-                />
+                <img :data-src="selectedSlide.src" :alt="selectedSlide.title" class="w-full h-96 object-scale-down px-3"
+                    fetchpriority="low" as="image" />
             </div>
         </div>
     </div>
@@ -78,32 +50,32 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 // Carousel data with titles and descriptions
 const slides = ref([
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Screenshot%202024-10-06%20at%2010.11.37.webp",
+        src: "https://storage.wahyuivan.dev/Screenshot%202024-10-06%20at%2010.11.37.webp",
         title: "Chrome Built-in AI",
         desc: "An experimental Chrome feature to use AI directly in the browser.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture2.webp",
+        src: "https://storage.wahyuivan.dev/Picture2.webp",
         title: "Claudia Fitness",
         desc: "An admin dashboard for Claudia Fitness to manage clients, orders, and payments.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture3.webp",
+        src: "https://storage.wahyuivan.dev/Picture3.webp",
         title: "MyTISI Gobolabali",
         desc: "An admin dashboard for MyTISI Gobolabali to manage players, teams, and matches.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture4.webp",
+        src: "https://storage.wahyuivan.dev/Picture4.webp",
         title: "PT. Pancoran Mas",
         desc: "An admin dashboard for PT. Pancoran Mas to manage LPG sales and inventory.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture5.webp",
+        src: "https://storage.wahyuivan.dev/Picture5.webp",
         title: "ASDP Indonesia Ferry",
         desc: "An admin dashboard for ASDP Indonesia Ferry to manage blog posts and comments.",
     },
     {
-        src: "https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/Picture1.webp",
+        src: "https://storage.wahyuivan.dev/Picture1.webp",
         title: "Alengkong Bali Camp",
         desc: "An interactive website to ease up user booking process for Alengkong Bali Camp.",
     },

@@ -7,41 +7,21 @@
             <div class="mt-3 mb-3 text-md md:text-justify">
                 I'm a passionate {{ new Date().getFullYear() - 1999 }}-years-old
                 full-time software engineer by day,
-                <a
-                    href="https://www.youtube.com/@wahyuivan9"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="underline"
-                    >tech content creator</a
-                >
+                <a href="https://www.youtube.com/@wahyuivan9" target="_blank" rel="noopener noreferrer"
+                    class="underline">tech content creator</a>
                 by night, and a full-time tech enthusiast living in Bali,
                 Indonesia 🇮🇩 🌴
             </div>
-            <div
-                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify"
-            >
-                <font-awesome-icon
-                    :icon="['fas', 'laptop-code']"
-                    class="w-5 h-5 mr-1"
-                />
+            <div class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify">
+                <font-awesome-icon :icon="['fas', 'laptop-code']" class="w-5 h-5 mr-1" />
                 <div>
                     I'm currently working at
-                    <a
-                        :href="`https://taksu.tech`"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="font-black underline"
-                        >PT. Taksu Teknologi Indonesia</a
-                    >
+                    <a :href="`https://taksu.tech`" target="_blank" rel="noopener noreferrer"
+                        class="font-black underline">PT. Taksu Teknologi Indonesia</a>
                 </div>
             </div>
-            <div
-                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify"
-            >
-                <font-awesome-icon
-                    :icon="['fas', 'code']"
-                    class="w-5 h-5 mr-1"
-                />
+            <div class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify">
+                <font-awesome-icon :icon="['fas', 'code']" class="w-5 h-5 mr-1" />
                 <div v-if="vscode">
                     Currently diving into code since:
                     <span class="font-black">{{
@@ -61,31 +41,20 @@
                 <div v-else>I'm not working on anything right now.</div>
             </div>
             <div class="flex gap-4 mt-8 text-xl md:gap-5 md:mx-0">
-                <a
-                    v-for="(link, key) in socials"
-                    :key="key"
-                    :href="link"
-                    :alt="key"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="relative group"
-                >
+                <a v-for="(link, key) in socials" :key="key" :href="link" :alt="key" target="_blank"
+                    rel="noopener noreferrer" class="relative group">
                     <!-- Font Awesome Icon -->
-                    <font-awesome-icon
-                        :icon="[
-                            'fab',
-                            key === 'X' ? 'x-twitter' : key.toLowerCase(),
-                        ]"
-                    />
+                    <font-awesome-icon :icon="[
+                        'fab',
+                        key === 'X' ? 'x-twitter' : key.toLowerCase(),
+                    ]" />
 
                     <!-- Tooltip -->
                     <span
-                        class="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-xs font-medium text-one-dark-bg bg-one-dark-foreground rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg"
-                    >
+                        class="absolute top-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-xs font-medium text-one-dark-bg bg-one-dark-foreground rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none shadow-lg">
                         {{ key }}
                         <span
-                            class="absolute w-2 h-2 bg-one-dark-foreground rotate-45 transform -translate-x-1/2 left-1/2 bottom-full -mb-1"
-                        ></span>
+                            class="absolute w-2 h-2 bg-one-dark-foreground rotate-45 transform -translate-x-1/2 left-1/2 bottom-full -mb-1"></span>
                     </span>
                 </a>
             </div>
@@ -93,26 +62,18 @@
         <div class="relative group">
             <!-- Profile Image -->
             <div v-lazy-container="{ selector: 'img' }">
-                <img
-                    data-src="https://pub-d57d4a3755f846b1b0e7353728ebbc1e.r2.dev/profile.webp"
+                <img data-src="https://storage.wahyuivan.dev/profile.webp"
                     class="w-72 lg:h-80 rounded my-10 mx-auto h-80 object-cover border-[#e5c07b] border-[0.5px]"
-                    alt="Profile Picture"
-                    fetchpriority="high"
-                    as="image"
-                />
+                    alt="Profile Picture" fetchpriority="high" as="image" />
             </div>
 
             <!-- Overlay (hidden by default, appears on hover) -->
             <div
-                class="text-sm absolute inset-0 bg-one-dark-bg bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
+                class="text-sm absolute inset-0 bg-one-dark-bg bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <!-- See CV Button -->
-                <a
-                    href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-60 mt-56"
-                >
+                <a href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
+                    target="_blank" rel="noopener noreferrer"
+                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-60 mt-56">
                     <font-awesome-icon :icon="['fas', 'download']" />
                     Download CV
                 </a>
