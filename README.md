@@ -1,8 +1,8 @@
 ![](https://storage.wahyuivan.dev/screenshot.webp)
 
-# wahyuivan.dev
+# [Wahyu's Personal Website](https://wahyuivan.dev/)
 
-🌐 My personal website, updated with Vue 3 and Tailwind CSS.
+🚀 My personal website, updated with Vue 3 and Tailwind CSS.
 
 ## Getting Started
 
