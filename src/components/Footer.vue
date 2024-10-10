@@ -7,5 +7,4 @@
             {{ new Date().getFullYear() }} — wahyuivan.dev
         </div>
     </div>
-    <div class="autobacklink" style="color: #282c34"></div>
 </template>

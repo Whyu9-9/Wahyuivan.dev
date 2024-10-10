@@ -49,7 +49,7 @@
         </div>
         <div class="relative mb-16"><Github /></div>
         <div
-            class="z-0 bottom-[6rem] right-0 absolute mb-3 mr-5 text-[7rem] opacity-15 select-none"
+            class="z-0 bottom-14 right-0 absolute mb-3 mr-5 text-[7rem] opacity-15 select-none"
         >
             💻
         </div>
