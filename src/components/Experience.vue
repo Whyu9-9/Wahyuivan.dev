@@ -83,7 +83,7 @@ const experiences = [
         companyWebsite: "https://taksu.tech/",
     },
     {
-        title: "Software Engineer - FE",
+        title: "Software Engineer",
         company: "Incentro",
         period: "Start Nov 2024",
         description:
