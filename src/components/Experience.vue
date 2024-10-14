@@ -75,7 +75,7 @@ const experiences = [
         companyWebsite: "https://djoin.id/",
     },
     {
-        title: "Software Engineer - Fullstack",
+        title: "Software Engineer - FE",
         company: "Taksu Tech",
         period: "Aug 2023 - Oct 2024",
         description:
@@ -83,7 +83,7 @@ const experiences = [
         companyWebsite: "https://taksu.tech/",
     },
     {
-        title: "Software Engineer - FE",
+        title: "Software Engineer",
         company: "Incentro",
         period: "Start Nov 2024",
         description:
