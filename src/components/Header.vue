@@ -1,10 +1,43 @@
 <template>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-3 mt-5 justify-center">
+    <div class="grid grid-cols-1 md:grid-cols-2 mb-3 mt-5 justify-center">
         <div class="flex flex-col">
-            <h1 class="font-sans font-black text-5xl mb-3 mt-5">
-                Hi, I'm <span :class="['text-5xl', status]">Wahyu</span>.
+            <h1 class="font-sans font-black text-4xl md:text-5xl mb-4 mt-5">
+                Hi, I'm
+                <!-- See CV Button -->
+                <a
+                    :class="['text-4xl md:text-5xl', status]"
+                    href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline"
+                >
+                    Wahyu
+                </a>
             </h1>
-            <div class="mt-3 mb-3 text-md md:text-justify">
+            <vue-typewriter-effect
+                pauseFor="3000"
+                :class="['mb-3 text-xs md:text-sm', status]"
+                :strings="[
+                    'console.log(&quot;Welcome to my page!&quot;);',
+                    'print(&quot;Welcome to my page!&quot;)',
+                    '&lt;?php echo &quot;Welcome to my page!&quot;; ?&gt;',
+                    'System.out.println(&quot;Welcome to my page!&quot;);',
+                    'printf(&quot;Welcome to my page!\\n&quot;);',
+                    'std::cout &lt;&lt; &quot;Welcome to my page!&quot; &lt;&lt; std::endl;',
+                    'puts &quot;Welcome to my page!&quot;',
+                    'fmt.Println(&quot;Welcome to my page!&quot;)',
+                    'println(&quot;Welcome to my page!&quot;)',
+                    'print(&quot;Welcome to my page!&quot;)',
+                    'echo &quot;Welcome to my page!&quot;;',
+                    'Console.WriteLine(&quot;Welcome to my page!&quot;);',
+                    'echo &quot;Welcome to my page!&quot;',
+                    'document.write(&quot;Welcome to my page!&quot;); ',
+                    'cat &quot;Hello, World!&quot;',
+                    'write-host &quot;Hello, World!&quot;',
+                ]"
+            />
+
+            <div class="mt-3 mb-3 text-sm md:text-lg text-justify">
                 I'm a passionate {{ new Date().getFullYear() - 1999 }}-years-old
                 full-time software engineer by day,
                 <a
@@ -18,7 +51,7 @@
                 Indonesia 🇮🇩 🌴
             </div>
             <div
-                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify"
+                class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3"
             >
                 <font-awesome-icon
                     :icon="['fas', 'laptop-code']"
@@ -92,36 +125,21 @@
         </div>
         <div class="relative group">
             <!-- Profile Image -->
-            <div v-lazy-container="{ selector: 'img' }">
+            <div v-lazy-container="{ selector: 'img' }" class="lg:-mr-32">
                 <img
                     data-src="https://storage.wahyuivan.dev/profile.webp"
-                    class="w-72 lg:h-80 rounded my-10 mx-auto h-96 object-cover border-[#e5c07b] border-[0.5px] hidden md:block"
+                    class="w-72 lg:w-80 lg:h-[23rem] rounded my-10 mx-auto h-96 object-cover hidden md:block glow-effect"
                     alt="Profile Picture"
                     fetchpriority="high"
                     as="image"
                 />
-            </div>
-
-            <!-- Overlay (hidden by default, appears on hover) -->
-            <div
-                class="text-sm absolute inset-0 bg-one-dark-bg bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-                <!-- See CV Button -->
-                <a
-                    href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="bg-one-dark-foreground text-one-dark-white py-2 px-4 rounded-lg font-bold hover:bg-one-dark-blue hover:text-one-dark-white transition-colors md:mt-60 mt-56"
-                >
-                    <font-awesome-icon :icon="['fas', 'download']" />
-                    Download CV
-                </a>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import VueTypewriterEffect from "vue-typewriter-effect";
 
 const ws = ref(null);
 const status = ref("text-one-dark-foreground");
@@ -255,3 +273,8 @@ const timeDiff = computed(() => {
     return diffString || "just started";
 });
 </script>
+<style scoped>
+.glow-effect {
+    box-shadow: 0 0 100px 5px rgba(255, 160, 0, 0.3);
+}
+</style>

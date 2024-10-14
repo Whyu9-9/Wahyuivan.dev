@@ -11,7 +11,7 @@
         <div class="text-2xl font-sans font-bold text-center">
             Sorry, this website is
             <span class="text-one-dark-red">not optimized</span> for your device
-            🥲
+            :(
         </div>
     </div>
     <div
