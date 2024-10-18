@@ -2,7 +2,7 @@
 
 # [Wahyu's Personal Website](https://wahyuivan.dev/)
 
-🚀 My personal website, updated with Vue 3 and Tailwind CSS.
+🚀 My personal website, created using Vue 3 and Tailwind CSS.
 
 ## Getting Started
 
