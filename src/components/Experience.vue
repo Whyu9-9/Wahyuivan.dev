@@ -79,7 +79,7 @@ const experiences = [
         company: "Taksu Tech",
         period: "Aug 2023 - Oct 2024",
         description:
-            "Working on various software projects, including web development, mobile app development, and backend development.",
+            "Working on various software projects, including web development and mobile app development",
         companyWebsite: "https://taksu.tech/",
     },
     {
