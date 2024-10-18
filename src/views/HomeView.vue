@@ -18,7 +18,7 @@
         class="too-small-max:hidden sm:pt-20 max-w-screen-lg mx-auto p-16 relative"
     >
         <div
-            class="z-0 absolute -mt-10 ml-5 left-0 text-[5rem] opacity-15 select-none"
+            class="z-0 absolute -mt-5 ml-5 left-0 text-[5rem] opacity-15 select-none"
         >
             🚀
         </div>
