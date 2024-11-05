@@ -60,11 +60,11 @@
                 <div>
                     I'm currently working at
                     <a
-                        :href="`https://taksu.tech`"
+                        :href="`https://www.incentro.com/en`"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="font-black underline"
-                        >PT. Taksu Teknologi Indonesia</a
+                        >Incentro</a
                     >
                 </div>
             </div>

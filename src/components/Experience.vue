@@ -83,11 +83,11 @@ const experiences = [
         companyWebsite: "https://taksu.tech/",
     },
     {
-        title: "Software Engineer",
+        title: "Frontend Developer",
         company: "Incentro",
-        period: "Start Nov 2024",
+        period: "Nov 2024 - Present",
         description:
-            "Soon will contribute to developing web applications for various scale projects, focusing on user experience and performance.",
+            "Contribute to developing web applications for various scale projects, focusing on user experience and performance.",
         companyWebsite: "https://www.incentro.com/en",
     },
 ];
