@@ -48,7 +48,7 @@
                     >tech content creator</a
                 >
                 by night, and a full-time tech enthusiast living in Bali,
-                Indonesia 🇮🇩 🌴
+                Indonesia 🌴
             </div>
             <div
                 class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3"

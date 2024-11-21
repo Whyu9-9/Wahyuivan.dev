@@ -2,6 +2,6 @@ User-agent: Twitterbot
 Disallow:
 
 User-agent: *
-Disallow: /
+Disallow: 
 
 Sitemap: https://wahyuivan.dev/sitemap.xml

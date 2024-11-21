@@ -2,7 +2,7 @@
     <div>
         <h2 class="mb-3 font-black text-2xl">~/repositories/</h2>
         <div
-            class="relative md:flex justify-center items-center bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg mb-4 overflow-scroll hidden p-5 w-full"
+            class="no-scrollbar relative md:flex justify-center items-center bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg mb-4 overflow-scroll hidden p-5 w-full"
         >
             <i
                 class="devicon-github-plain absolute top-2 left-2 text-2xl m-3"
