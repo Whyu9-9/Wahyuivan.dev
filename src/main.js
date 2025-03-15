@@ -16,10 +16,14 @@ import { faGithub, faLinkedin, faInstagram, faTiktok, faMedium, faYoutube, faXTw
 library.add(faGithub, faLinkedin, faInstagram, faTiktok, faMedium, faYoutube, faXTwitter, faStar, faCodeBranch, faCode, faLaptopCode, faCopyright, faDownload)
 
 const app = createApp(App)
-
 app.use(router) // Use the router
 app.component('font-awesome-icon', FontAwesomeIcon)
-app.use(VueLazyload)
+app.use(VueLazyload, {
+  preLoad: 1.3,
+  error: '/error.gif',
+  loading: '/loading.gif',
+  attempt: 1
+})
 app.use(gtag, {
   property: {
     id: import.meta.env.VITE_GA_ID,
