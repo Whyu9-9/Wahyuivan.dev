@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="mb-3 font-black text-2xl">~/projects/</h2>
-        <div class="relative w-full">
+        <div class="relative w-full" ref="carouselRef">
             <!-- Carousel Items -->
             <div class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]" @touchstart="onTouchStart"
                 @touchmove="onTouchMove" @touchend="onTouchEnd">
@@ -26,8 +26,8 @@
             <!-- Indicators -->
             <div class="indicators flex justify-center space-x-2 mt-4">
                 <span v-for="(slide, index) in slides" :key="index" @click="goToSlide(index)" :class="`w-2 h-2 rounded-full cursor-pointer ${index === currentSlide
-                        ? 'bg-one-dark-green'
-                        : 'bg-one-dark-gray'
+                    ? 'bg-one-dark-green'
+                    : 'bg-one-dark-gray'
                     }`" class="hidden md:block"></span>
             </div>
         </div>
@@ -125,6 +125,9 @@ const goToSlide = (index) => {
 
 // Auto-slide logic
 const startAutoSlide = () => {
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+    }
     autoSlideInterval = setInterval(() => {
         nextSlide();
     }, 7000); // Change slide every 7 seconds
@@ -145,21 +148,54 @@ const openModal = (slide) => {
     selectedSlide.value = slide;
     isModalOpen.value = true;
     document.body.style.overflow = "hidden"; // Disable scroll when modal is open
+
+    // Pause auto-slide when modal is open
+    if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+    }
 };
 
 const closeModal = () => {
     isModalOpen.value = false;
     document.body.style.overflow = ""; // Restore scroll when modal is closed
+
+    // Resume auto-slide when modal is closed
+    startAutoSlide();
 };
 
-// Lifecycle hooks
-onMounted(() => {
-    startAutoSlide(); // Start the auto-slide when the component is mounted
-});
+// Intersection Observer for performance
+const carouselRef = ref(null);
+const isCarouselVisible = ref(false);
 
-onBeforeUnmount(() => {
-    if (autoSlideInterval) {
-        clearInterval(autoSlideInterval); // Clean up the interval on component unmount
+onMounted(() => {
+    // Start the auto-slide when the component is mounted
+    startAutoSlide();
+
+    // Set up intersection observer for performance
+    if (carouselRef.value) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    isCarouselVisible.value = entry.isIntersecting;
+                    if (entry.isIntersecting) {
+                        startAutoSlide();
+                    } else {
+                        // Pause auto-slide when not visible
+                        if (autoSlideInterval) {
+                            clearInterval(autoSlideInterval);
+                        }
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        observer.observe(carouselRef.value);
+
+        // Clean up observer on unmount
+        onBeforeUnmount(() => {
+            observer.disconnect();
+        });
     }
 });
 </script>
