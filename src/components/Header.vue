@@ -99,6 +99,13 @@
                     </span>
                 </a>
             </div>
+            <div class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify">
+                Project or Collaborations?
+                <a href="mailto:wahyuivanmahendra@gmail.com" target="_blank" rel="noopener noreferrer"
+                    class="font-black underline">
+                    Contact me
+                </a>
+            </div>
         </div>
         <div class="relative group">
             <!-- Profile Image -->
