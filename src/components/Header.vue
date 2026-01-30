@@ -1,10 +1,10 @@
 <template>
     <div class="grid grid-cols-1 md:grid-cols-2 mb-3 mt-5 justify-center">
         <div class="flex flex-col">
-            <h1 class="font-sans font-black text-4xl md:text-5xl mb-4 mt-5">
+            <h1 class="font-sans font-black text-3xl md:text-5xl mb-4 mt-5">
                 Hi, I'm
                 <!-- See CV Button -->
-                <a :class="['text-4xl md:text-5xl underline', status]"
+                <a :class="['text-3xl md:text-5xl underline', status]"
                     href="https://docs.google.com/document/d/1P-8tGI_fHPG6Afj4WaU89pA1ZpRtZz-uzf164pvGYIk/edit?usp=sharing"
                     target="_blank" rel="noopener noreferrer">
                     Wahyu
@@ -99,10 +99,11 @@
                     </span>
                 </a>
             </div>
-            <div class="flex items-center gap-2 text-sm text-one-dark-foreground mt-3 md:text-justify">
-                Project or Collaborations?
+            <div
+                class="flex flex-col sm:flex-row sm:items-left gap-1 sm:gap-2 text-sm text-one-dark-foreground mt-3 text-left sm:text-left md:text-justify">
+                <span>Project or Collaborations?</span>
                 <a href="mailto:wahyuivanmahendra@gmail.com" target="_blank" rel="noopener noreferrer"
-                    class="font-black underline">
+                    class="font-black underline inline-block py-1 sm:py-0">
                     Contact me
                 </a>
             </div>
