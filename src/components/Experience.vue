@@ -12,7 +12,7 @@
                 <!-- Odd Index - Timeline Item Right -->
                 <div v-if="index % 2 === 0" class="mb-8 flex items-center justify-start md:mb-14">
                     <div class="w-full md:w-1/2 text-left pl-6 pr-6 md:text-right">
-                        <h3 class="font-bold text-2xl font-sans">
+                        <h3 class="font-bold text-xl font-sans">
                             {{ experience.title }}
                         </h3>
                         <p class="text-xs text-one-dark-foreground font-sans md:text-sm">
@@ -20,14 +20,14 @@
                                 rel="noopener noreferrer">{{ experience.company }}</a>,
                             {{ experience.period }}
                         </p>
-                        <p class="mt-2 text-one-dark-foreground text-xs hidden md:block">
+                        <p class="mt-2 text-one-dark-foreground text-xs">
                             {{ experience.description }}
                         </p>
                     </div>
                     <div :class="index !== 0
                         ? 'bg-one-dark-red'
                         : 'bg-one-dark-green'
-                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4"></div>
+                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4 hover:ring-2 hover:ring-one-dark-green transition-all duration-200 cursor-default"></div>
                 </div>
 
                 <!-- Even Index - Timeline Item Left -->
@@ -35,7 +35,7 @@
                     <div :class="index !== 0
                         ? 'bg-one-dark-red'
                         : 'bg-one-dark-green'
-                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"></div>
+                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4 hover:ring-2 hover:ring-one-dark-green transition-all duration-200 cursor-default"></div>
                     <div class="w-full md:w-1/2 text-left pl-6 pr-6">
                         <h3 class="font-bold text-xl font-sans">
                             {{ experience.title }}
@@ -44,7 +44,7 @@
                             <a class="text-one-dark-blue font-bold" :href="experience.companyWebsite"
                                 rel="noopener noreferrer">{{ experience.company }}</a>, {{ experience.period }}
                         </p>
-                        <p class="mt-2 text-one-dark-foreground text-xs hidden md:block">
+                        <p class="mt-2 text-one-dark-foreground text-xs">
                             {{ experience.description }}
                         </p>
                     </div>

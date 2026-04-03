@@ -83,7 +83,7 @@
             </div>
             <div class="flex gap-4 mt-8 text-xl md:text-2xl md:gap-5 md:mx-0">
                 <a v-for="(link, key) in socials" :key="key" :href="link" :alt="key" target="_blank"
-                    rel="noopener noreferrer" class="relative group">
+                    rel="noopener noreferrer" class="relative group hover:scale-125 transition-transform duration-150">
                     <!-- Font Awesome Icon -->
                     <font-awesome-icon :icon="[
                         'fab',
