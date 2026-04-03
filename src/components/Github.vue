@@ -10,7 +10,7 @@
             <div v-if="!repos.length">Github repos could not be retrieved.</div>
             <a v-bind:key="repo.html_url" v-for="repo in repos" :href="repo.html_url" target="_blank"
                 rel="noopener noreferrer"
-                class="flex flex-col justify-between px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm">
+                class="flex flex-col justify-between px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm hover:-translate-y-1 hover:border-one-dark-gray transition-all duration-200">
                 <div>
                     <div v-lazy-container="{ selector: 'img' }"
                         class="flex items-center gap-2 text-one-dark-foreground">
