@@ -6,4 +6,4 @@ node_modules
 # local env files
 .env
 
-pnpm-lock.yaml
+pnpm-lock.yaml.worktrees
