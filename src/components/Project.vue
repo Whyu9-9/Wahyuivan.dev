@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 class="mb-3 font-black text-2xl">~/projects/</h2>
-        <div class="relative w-full" ref="carouselRef">
+        <div class="relative w-full" ref="carouselRef" @keydown.left.prevent="prevSlide" @keydown.right.prevent="nextSlide" tabindex="0">
             <!-- Carousel Items -->
             <div class="w-full h-full overflow-hidden relative border-one-dark-white[0.5px]" @touchstart="onTouchStart"
                 @touchmove="onTouchMove" @touchend="onTouchEnd">
@@ -16,12 +16,34 @@
                         <h3 class="text-xl font-bold font-sans md:text-2xl">
                             {{ slide.title }}
                         </h3>
-                        <p class="text-xs text-one-dark-white md:text-sm">
+                        <p class="text-xs text-one-dark-foreground md:text-sm">
                             {{ slide.desc }}
                         </p>
                     </div>
                 </div>
             </div>
+
+            <!-- Prev Arrow -->
+            <button
+                @click.stop="prevSlide"
+                class="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center min-w-[44px] min-h-[44px] w-10 h-10 rounded-full bg-one-dark-bg/70 hover:bg-one-dark-bg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-one-dark-green"
+                aria-label="Previous slide"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-one-dark-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <!-- Next Arrow -->
+            <button
+                @click.stop="nextSlide"
+                class="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center min-w-[44px] min-h-[44px] w-10 h-10 rounded-full bg-one-dark-bg/70 hover:bg-one-dark-bg transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-one-dark-green"
+                aria-label="Next slide"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-one-dark-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
 
             <!-- Indicators -->
             <div class="indicators flex justify-center space-x-2 mt-4">
