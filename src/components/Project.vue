@@ -16,7 +16,7 @@
                         <h3 class="text-xl font-bold font-sans md:text-2xl">
                             {{ slide.title }}
                         </h3>
-                        <p class="text-xs text-one-dark-foreground md:text-sm">
+                        <p class="text-xs text-one-dark-white md:text-sm">
                             {{ slide.desc }}
                         </p>
                     </div>
