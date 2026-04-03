@@ -55,8 +55,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 const experiences = [
     {
         title: "Backend Web Developer Intern",
