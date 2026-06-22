@@ -1,0 +1,8 @@
+; DNS for AI Discovery (DNS-AID) records for wahyuivan.dev.
+; Publish these records in the authoritative DNS zone for wahyuivan.dev.
+
+_index._agents.wahyuivan.dev. 3600 IN SVCB 1 wahyuivan.dev. (
+  alpn="h2,h3"
+  port=443
+  well-known="/.well-known/api-catalog"
+)
