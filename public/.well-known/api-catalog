@@ -1,0 +1,19 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://wahyuivan.dev/",
+      "service-doc": [
+        {
+          "href": "https://wahyuivan.dev/",
+          "type": "text/html"
+        }
+      ],
+      "sitemap": [
+        {
+          "href": "https://wahyuivan.dev/sitemap.xml",
+          "type": "application/xml"
+        }
+      ]
+    }
+  ]
+}
