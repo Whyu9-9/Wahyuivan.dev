@@ -9,7 +9,7 @@
                 :href="blog.link"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex flex-col px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
+                class="flex flex-col px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm hover:-translate-y-1 hover:border-one-dark-gray transition-all duration-200"
             >
                 <!-- Blog Image (always on top) -->
                 <div
@@ -18,7 +18,7 @@
                 >
                     <img
                         :data-src="getBlogImage(blog) || profileImage"
-                        class="rounded w-full lg:h-32 h-full object-contain lg:object-cover"
+                        class="rounded w-full h-32 object-cover"
                         :alt="blog.title"
                     />
                 </div>
