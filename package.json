@@ -7,7 +7,8 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "build:deploy": "npm install && vite build"
+        "build:deploy": "npm install && vite build",
+        "test": "node --test test/*.test.js"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.0.0",
