@@ -4,7 +4,6 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import gtag from 'vue-gtag';
-import 'devicon/devicon.min.css';
 import './assets/bg.css';
 import VueLazyload from 'vue-lazyload'
 

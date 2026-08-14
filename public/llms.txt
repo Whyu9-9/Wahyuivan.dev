@@ -1,0 +1,23 @@
+# Wahyu Ivan
+
+> Software engineer portfolio. Projects, experience, and contact links for Wahyu Ivan, formatted for LLM consumption.
+
+## Docs
+
+- [Markdown summary](https://wahyuivan.dev/index.md): Full portfolio summary in markdown
+- [Agent auth](https://wahyuivan.dev/auth.md): Authentication requirements for agents (none — public content)
+
+## Experience
+
+- [Incentro](https://www.incentro.com/en): Frontend Developer
+- [Taksu Tech](https://taksu.tech/): Software Engineer - FE
+- [Djoin](https://djoin.id/): Quality Assurance Engineer
+- [Timedoor Indonesia](https://timedoor.net/): Backend Web Developer Intern
+
+## Links
+
+- [GitHub](https://github.com/Whyu9-9)
+- [LinkedIn](https://www.linkedin.com/in/wahyuivan)
+- [Medium](https://medium.com/@wahyuivan)
+- [YouTube](https://www.youtube.com/@wahyuivan9)
+- [Twitter](https://twitter.com/ivanwahyu195)

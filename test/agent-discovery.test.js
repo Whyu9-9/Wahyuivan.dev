@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
 const linkHeaderValue =
-  '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </sitemap.xml>; rel="sitemap"; type="application/xml"'
+  '</.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json", </sitemap.xml>; rel="sitemap"; type="application/xml", </index.md>; rel="alternate"; type="text/markdown"'
 
 test('static hosts advertise agent discovery resources from the homepage', async () => {
   const headers = await readFile(new URL('../public/_headers', import.meta.url), 'utf8')

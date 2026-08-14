@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "1.0",
+  "serverInfo": {
+    "name": "wahyuivan.dev",
+    "version": "1.0.0",
+    "description": "Wahyu Ivan — Software Engineer portfolio"
+  },
+  "transport": null,
+  "capabilities": {},
+  "note": "Informational only — this is a public portfolio with no active MCP server."
+}

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div ref="root">
         <h2 class="mb-3 font-black text-2xl">~/content-showcase/</h2>
         <div class="grid md:grid-cols-2 gap-4">
             <!-- TikTok Section -->
@@ -29,7 +29,7 @@
                 <div class="social-embed flex justify-center items-center w-full overflow-hidden">
                     <iframe class="instagram-embed w-full h-full rounded-lg"
                         src="https://www.instagram.com/why.u9/embed" frameborder="0" scrolling="no"
-                        allowtransparency="true"></iframe>
+                        loading="lazy" allowtransparency="true"></iframe>
                 </div>
             </div>
         </div>
@@ -41,25 +41,38 @@ export default {
     name: 'SocialMedia',
     data() {
         return {
-
+            observer: null,
         }
     },
     mounted() {
-        // Load TikTok embed script
-        const tiktokScript = document.createElement('script')
-        tiktokScript.src = 'https://www.tiktok.com/embed.js'
-        tiktokScript.async = true
-        document.body.appendChild(tiktokScript)
+        // Defer the TikTok embed script until the section is actually visible,
+        // so it doesn't cost initial page load for users who never scroll to it.
+        this.observer = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                this.loadTiktokEmbed()
+                this.observer.disconnect()
+            }
+        })
+        this.observer.observe(this.$refs.root)
     },
     unmounted() {
-        // Clean up scripts when component is unmounted
+        this.observer?.disconnect()
+
         const scripts = document.getElementsByTagName('script')
         for (let script of scripts) {
             if (script.src.includes('tiktok.com/embed.js')) {
                 script.remove()
             }
         }
-    }
+    },
+    methods: {
+        loadTiktokEmbed() {
+            const tiktokScript = document.createElement('script')
+            tiktokScript.src = 'https://www.tiktok.com/embed.js'
+            tiktokScript.async = true
+            document.body.appendChild(tiktokScript)
+        },
+    },
 }
 </script>
 

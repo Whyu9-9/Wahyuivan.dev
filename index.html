@@ -151,5 +151,61 @@
                 });
             }
         </script>
+
+        <!-- WebMCP: expose portfolio tools to AI agents in supporting browsers -->
+        <script>
+            if ("modelContext" in navigator) {
+                navigator.modelContext.provideContext({
+                    tools: [
+                        {
+                            name: "get_portfolio_info",
+                            description:
+                                "Get information about Wahyu Ivan — software engineer",
+                            inputSchema: { type: "object", properties: {} },
+                            execute: async () => ({
+                                name: "Wahyu Ivan",
+                                role: "Software Engineer",
+                                website: "https://wahyuivan.dev",
+                                github: "https://github.com/Whyu9-9",
+                                linkedin:
+                                    "https://www.linkedin.com/in/wahyuivan",
+                                twitter: "https://twitter.com/ivanwahyu195",
+                            }),
+                        },
+                        {
+                            name: "get_projects",
+                            description:
+                                "Get list of projects built by Wahyu Ivan",
+                            inputSchema: { type: "object", properties: {} },
+                            execute: async () => ({
+                                projects: [
+                                    "Chrome Built-in AI",
+                                    "Claudia Fitness",
+                                    "MyTISI Gobolabali",
+                                    "PT. Pancoran Mas",
+                                    "ASDP Indonesia Ferry",
+                                    "Alengkong Bali Camp",
+                                ],
+                            }),
+                        },
+                        {
+                            name: "get_contact",
+                            description:
+                                "Get contact and social links for Wahyu Ivan",
+                            inputSchema: { type: "object", properties: {} },
+                            execute: async () => ({
+                                github: "https://github.com/Whyu9-9",
+                                linkedin:
+                                    "https://www.linkedin.com/in/wahyuivan",
+                                medium: "https://medium.com/@wahyuivan",
+                                youtube:
+                                    "https://www.youtube.com/@wahyuivan9",
+                                twitter: "https://twitter.com/ivanwahyu195",
+                            }),
+                        },
+                    ],
+                });
+            }
+        </script>
     </body>
 </html>

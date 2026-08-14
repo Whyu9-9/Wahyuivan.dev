@@ -3,7 +3,8 @@
         <h2 class="mb-3 font-black text-2xl">~/repositories/</h2>
         <div
             class="no-scrollbar relative md:flex justify-center items-center bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg mb-4 overflow-scroll hidden p-5 w-full">
-            <i class="devicon-github-plain absolute top-2 left-2 text-2xl m-3"></i>
+            <img :src="githubIcon" alt="GitHub" width="24" height="24" loading="lazy" decoding="async"
+                class="absolute top-2 left-2 h-6 w-6 m-3" />
             <ActivityCalendarWidget :data="convertedData" :daysToRender="daysToRender" />
         </div>
         <div class="grid md:grid-cols-2 gap-4">
@@ -26,7 +27,8 @@
                         'mt-2',
                         repo.archived ? 'line-through' : '',
                     ]">
-                        <i class="devicon-github-plain"></i>&nbsp;{{
+                        <img :src="githubIcon" alt="GitHub" width="16" height="16" loading="lazy" decoding="async"
+                            class="inline-block h-4 w-4 align-text-bottom" />&nbsp;{{
                             repo.name
                         }}
                     </div>
@@ -51,6 +53,7 @@
 <script setup>
 import { ref, onMounted, watch, onUnmounted } from "vue";
 import ActivityCalendarWidget from "activity-calendar-widget/vue";
+import githubIcon from "devicon/icons/github/github-original.svg";
 
 const projects = [
     "MyGram-API",
@@ -109,7 +112,7 @@ onMounted(async () => {
             };
         });
     } catch (error) {
-        console.error("Error fetching contributions:", error);
+        console.warn("Error fetching contributions:", error);
         convertedData.value = [];
     }
 
@@ -124,7 +127,7 @@ onMounted(async () => {
         const reposData = await reposResponse.json();
         repos.value = reposData.filter((repo) => projects.includes(repo.name));
     } catch (error) {
-        console.error("Error fetching repositories:", error);
+        console.warn("Error fetching repositories:", error);
         repos.value = [];
     }
 });

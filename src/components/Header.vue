@@ -110,10 +110,11 @@
         </div>
         <div class="relative group">
             <!-- Profile Image -->
-            <div v-lazy-container="{ selector: 'img' }" class="lg:-mr-32">
-                <img data-src="https://storage.wahyuivan.dev/profile.webp"
+            <div class="lg:-mr-32">
+                <img src="https://storage.wahyuivan.dev/profile.webp"
                     class="w-72 lg:w-80 lg:h-[23rem] rounded my-10 mx-auto h-96 object-cover hidden md:block glow-effect"
-                    alt="Profile Picture" fetchpriority="high" loading="eager" decoding="async" as="image" />
+                    alt="Profile Picture" fetchpriority="high" loading="eager" decoding="async" width="320"
+                    height="368" />
             </div>
         </div>
     </div>
@@ -160,7 +161,7 @@ const connectWebSocket = () => {
                     })
                 );
             } catch (sendError) {
-                console.error(
+                console.warn(
                     "Error sending message via WebSocket:",
                     sendError
                 );
@@ -198,7 +199,7 @@ const connectWebSocket = () => {
                     }
                 }
             } catch (messageError) {
-                console.error(
+                console.warn(
                     "Error handling WebSocket message:",
                     messageError
                 );
@@ -206,7 +207,7 @@ const connectWebSocket = () => {
         };
 
         ws.value.onerror = (error) => {
-            console.error("WebSocket Error:", error);
+            console.warn("WebSocket Error:", error);
             isConnected.value = false;
         };
 
@@ -224,7 +225,7 @@ const connectWebSocket = () => {
             }
         };
     } catch (connectionError) {
-        console.error(
+        console.warn(
             "Error establishing WebSocket connection:",
             connectionError
         );

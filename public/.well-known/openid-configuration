@@ -1,0 +1,6 @@
+{
+  "issuer": "https://wahyuivan.dev",
+  "grant_types_supported": [],
+  "scopes_supported": [],
+  "note": "This is a public portfolio with no protected APIs. No authentication is required."
+}
