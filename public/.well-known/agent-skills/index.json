@@ -2,5 +2,13 @@
   "$schema": "https://agentskills.io/schema/v0.2.0/index.json",
   "name": "wahyuivan.dev",
   "description": "Wahyu Ivan — Software Engineer portfolio",
-  "skills": []
+  "skills": [
+    {
+      "name": "portfolio-info",
+      "type": "skill-md",
+      "description": "Read Wahyu Ivan's portfolio content (info, projects, contact) as markdown/JSON without parsing HTML.",
+      "url": "https://wahyuivan.dev/.well-known/agent-skills/portfolio-info/SKILL.md",
+      "digest": "sha256:671fe3b263d7e3c2df64da4cf24d51a2e83bc70a2d946722d9c2b3f74cdeee1b"
+    }
+  ]
 }

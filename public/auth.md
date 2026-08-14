@@ -1,4 +1,4 @@
-# Agent Authentication
+# auth.md
 
 **Site:** https://wahyuivan.dev  
 **Type:** Public portfolio — no authentication required

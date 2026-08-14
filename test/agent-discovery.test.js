@@ -12,16 +12,6 @@ test('static hosts advertise agent discovery resources from the homepage', async
   assert.match(headers, new RegExp(`^  Link: ${escapeRegExp(linkHeaderValue)}$`, 'm'))
 })
 
-test('Vercel advertises the same agent discovery Link header from the homepage', async () => {
-  const vercelConfig = JSON.parse(
-    await readFile(new URL('../vercel.json', import.meta.url), 'utf8'),
-  )
-
-  const homepage = vercelConfig.headers.find((entry) => entry.source === '/')
-  assert.ok(homepage)
-  assert.deepEqual(homepage.headers, [{ key: 'Link', value: linkHeaderValue }])
-})
-
 test('the advertised API catalog is a linkset JSON document', async () => {
   const catalog = JSON.parse(
     await readFile(new URL('../public/.well-known/api-catalog', import.meta.url), 'utf8'),

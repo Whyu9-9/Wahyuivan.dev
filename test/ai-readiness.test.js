@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
@@ -58,12 +59,46 @@ test('agent-skills index has $schema and skills array', async () => {
   assert.ok(Array.isArray(doc.skills))
 })
 
+test('agent-skills index lists at least one skill with required fields', async () => {
+  const raw = await readFile(
+    new URL('../public/.well-known/agent-skills/index.json', import.meta.url),
+    'utf8',
+  )
+  const doc = JSON.parse(raw)
+  assert.ok(doc.skills.length > 0)
+  for (const skill of doc.skills) {
+    assert.match(skill.name, /^[a-z0-9-]+$/)
+    assert.ok(['skill-md', 'archive'].includes(skill.type))
+    assert.equal(typeof skill.description, 'string')
+    assert.match(skill.url, /^https:\/\//)
+    assert.match(skill.digest, /^sha256:[0-9a-f]{64}$/)
+  }
+})
+
+test('the published skill file matches its declared digest', async () => {
+  const raw = await readFile(
+    new URL('../public/.well-known/agent-skills/index.json', import.meta.url),
+    'utf8',
+  )
+  const doc = JSON.parse(raw)
+  const skill = doc.skills.find((s) => s.name === 'portfolio-info')
+  const path = new URL(skill.url).pathname
+  const content = await readFile(new URL(`../public${path}`, import.meta.url))
+  const hash = createHash('sha256').update(content).digest('hex')
+  assert.equal(skill.digest, `sha256:${hash}`)
+})
+
 // ── auth.md ──────────────────────────────────────────────────────────────────
 
 test('auth.md declares no authentication required', async () => {
   const content = await readFile(new URL('../public/auth.md', import.meta.url), 'utf8')
   assert.match(content, /no authentication required/i)
   assert.match(content, /wahyuivan\.dev/)
+})
+
+test('auth.md has an H1 heading that contains "auth.md"', async () => {
+  const content = await readFile(new URL('../public/auth.md', import.meta.url), 'utf8')
+  assert.match(content, /^#\s+.*auth\.md.*$/im)
 })
 
 // ── index.md ─────────────────────────────────────────────────────────────────
@@ -116,26 +151,52 @@ test('_headers serves application/json for /.well-known/mcp/server-card.json', a
   assert.match(headers, /Content-Type: application\/json; charset=utf-8/)
 })
 
-test('vercel.json includes Content-Type for /index.md', async () => {
-  const config = JSON.parse(
-    await readFile(new URL('../vercel.json', import.meta.url), 'utf8'),
-  )
-  const entry = config.headers.find((h) => h.source === '/index.md')
-  assert.ok(entry)
-  assert.deepEqual(entry.headers, [{ key: 'Content-Type', value: 'text/markdown; charset=utf-8' }])
-})
-
 test('_headers serves text/plain for /llms.txt', async () => {
   const headers = await readFile(new URL('../public/_headers', import.meta.url), 'utf8')
   assert.match(headers, /^\/llms\.txt\n/m)
   assert.match(headers, /Content-Type: text\/plain; charset=utf-8/)
 })
 
-test('vercel.json includes Content-Type for /llms.txt', async () => {
-  const config = JSON.parse(
-    await readFile(new URL('../vercel.json', import.meta.url), 'utf8'),
-  )
-  const entry = config.headers.find((h) => h.source === '/llms.txt')
-  assert.ok(entry)
-  assert.deepEqual(entry.headers, [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }])
+// ── markdown negotiation (Cloudflare Pages Function) ─────────────────────────
+
+test('functions/index.js serves index.md as text/markdown when Accept asks for it', async () => {
+  const { onRequest } = await import('../functions/index.js')
+  const request = new Request('https://wahyuivan.dev/', {
+    headers: { accept: 'text/markdown' },
+  })
+  let fetchedUrl
+  const context = {
+    request,
+    env: {
+      ASSETS: {
+        fetch: async (req) => {
+          fetchedUrl = req.url
+          return new Response('# Wahyu Ivan', { status: 200 })
+        },
+      },
+    },
+    next: () => {
+      throw new Error('should not fall through to static assets')
+    },
+  }
+
+  const response = await onRequest(context)
+  assert.equal(fetchedUrl, 'https://wahyuivan.dev/index.md')
+  assert.equal(response.headers.get('Content-Type'), 'text/markdown; charset=utf-8')
+  assert.equal(await response.text(), '# Wahyu Ivan')
+})
+
+test('functions/index.js falls through to static assets for normal browser requests', async () => {
+  const { onRequest } = await import('../functions/index.js')
+  const request = new Request('https://wahyuivan.dev/', {
+    headers: { accept: 'text/html' },
+  })
+  const context = {
+    request,
+    env: { ASSETS: { fetch: async () => new Response('should not be called') } },
+    next: async () => new Response('<html></html>', { status: 200 }),
+  }
+
+  const response = await onRequest(context)
+  assert.equal(await response.text(), '<html></html>')
 })
