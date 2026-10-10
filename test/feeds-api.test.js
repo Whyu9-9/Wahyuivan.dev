@@ -14,7 +14,6 @@ beforeEach(() => {
   upstream = {
     'api.github.com': () => Response.json([repo('MyGram-API'), repo('some-fork')]),
     'github-contributions-api.jogruber.de': () => Response.json({ contributions: [{ date: '2026-01-01', count: 3, level: 2 }] }),
-    'api.rss2json.com': () => Response.json({ items: Array.from({ length: 8 }, (_, i) => ({ title: `Post ${i}`, link: `l${i}`, pubDate: 'p', content: 'x' })) }),
   }
   globalThis.fetch = async (url, init) => {
     requests.push({ url: String(url), init })
@@ -60,35 +59,30 @@ test('github feed survives a failing contributions API', async () => {
   assert.equal(body.repos.length, 1)
 })
 
-test('posts feed returns the latest five trimmed posts', async () => {
-  const body = await (await call('posts')).json()
-  assert.equal(body.length, 5)
-  assert.deepEqual(Object.keys(body[0]), ['title', 'link', 'pubDate'])
-})
-
 test('second request is served from the edge cache', async () => {
-  await call('posts')
+  await call('github')
   const before = requests.length
-  const response = await call('posts')
+  const response = await call('github')
   assert.equal(response.status, 200)
   assert.equal(requests.length, before)
 })
 
 test('query strings cannot bypass the cache', async () => {
-  await call('posts')
+  await call('github')
   const before = requests.length
-  await call('posts', {}, '?bust=1')
-  await call('posts', {}, '?bust=2')
+  await call('github', {}, '?bust=1')
+  await call('github', {}, '?bust=2')
   assert.equal(requests.length, before)
 })
 
 test('upstream failure returns 502 and is not cached', async () => {
-  upstream['api.rss2json.com'] = () => new Response('down', { status: 503 })
-  const response = await call('posts')
+  upstream['api.github.com'] = () => new Response('down', { status: 503 })
+  const response = await call('github')
   assert.equal(response.status, 502)
   assert.equal(cached.size, 0)
 })
 
 test('unknown feed is a 404', async () => {
   assert.equal((await call('nope')).status, 404)
+  assert.equal((await call('posts')).status, 404)
 })

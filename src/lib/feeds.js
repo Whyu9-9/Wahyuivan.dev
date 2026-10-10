@@ -1,5 +1,6 @@
-// Loaders for the GitHub and Medium sections. Shared by the /api/[feed] Pages Function
-// (cached at the edge in production) and the browser during `npm run dev`, where functions don't run.
+// Loaders for the GitHub and Medium sections.
+// GitHub goes through the cached /api/github Pages Function in production; Medium is fetched from the browser
+// because rss2json rejects requests coming from Cloudflare's servers.
 
 const GITHUB_USER = "Whyu9-9";
 const MEDIUM_USER = "wahyuivan";
@@ -43,7 +44,7 @@ export const fetchPosts = async () => {
     return data.items.slice(0, 5).map(({ title, link, pubDate }) => ({ title, link, pubDate }));
 };
 
-// Production reads through the cached Pages Function; dev hits the sources directly.
+// Production reads through the cached Pages Function; dev hits the source directly (functions don't run in Vite).
 export const loadFeed = async (feed, loader) => {
     if (import.meta.env?.DEV) return loader();
     const response = await fetch(`/api/${feed}`);

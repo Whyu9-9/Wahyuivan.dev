@@ -1,8 +1,7 @@
-import { fetchGithub, fetchPosts } from "../../src/lib/feeds.js";
+import { fetchGithub } from "../../src/lib/feeds.js";
 
 const feeds = {
     github: (env) => fetchGithub({ token: env.GITHUB_TOKEN }),
-    posts: () => fetchPosts(),
 };
 
 // new Response + JSON.stringify rather than Response.json, which older Pages compatibility dates lack
@@ -12,7 +11,7 @@ const json = (body, init = {}) =>
         headers: { "Content-Type": "application/json; charset=utf-8", ...init.headers },
     });
 
-// Serves /api/github and /api/posts, cached at the edge for an hour so visitors never hit the upstream APIs.
+// Serves /api/github, cached at the edge for an hour so visitors never hit the upstream APIs.
 export async function onRequestGet({ request, params, env, waitUntil }) {
     const load = feeds[params.feed];
     if (!load) return new Response("Not found", { status: 404 });

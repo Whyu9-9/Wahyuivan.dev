@@ -34,7 +34,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { fetchPosts, loadFeed } from "../lib/feeds.js";
+import { fetchPosts } from "../lib/feeds.js";
 
 const posts = ref([]);
 const state = ref("loading");
@@ -47,7 +47,7 @@ const formatDate = (date) =>
 
 onMounted(async () => {
     try {
-        posts.value = await loadFeed("posts", fetchPosts);
+        posts.value = await fetchPosts();
         state.value = posts.value.length ? "ok" : "error";
     } catch (error) {
         state.value = "error";
