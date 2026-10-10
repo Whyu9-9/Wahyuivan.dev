@@ -2,6 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Faint dot grid down the whole page, aligned with the hero grid */
+    body {
+        @apply bg-one-dark-deep font-sans text-one-dark-white;
+        background-image: radial-gradient(rgb(171 178 191 / 0.045) 1px, transparent 1px);
+        background-size: 22px 22px;
+    }
+
+    /* Glow + dot grid behind the hero, scrolls away with it */
+    body::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto;
+        height: 56rem;
+        z-index: -1;
+        pointer-events: none;
+        background:
+            radial-gradient(60rem 28rem at 50% -8rem, rgb(97 175 239 / 0.1), transparent 70%),
+            radial-gradient(rgb(171 178 191 / 0.13) 1px, transparent 1px) 0 0 / 22px 22px;
+        -webkit-mask-image: radial-gradient(80rem 44rem at 50% 0, #000 30%, transparent 75%);
+        mask-image: radial-gradient(80rem 44rem at 50% 0, #000 30%, transparent 75%);
+    }
+
+    /* Film grain */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    :focus-visible {
+        outline: 2px solid theme("colors.one-dark-blue");
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+}
+
+@layer components {
+    .section-label {
+        @apply mb-2 font-mono text-sm text-one-dark-foreground;
+    }
+
+    .section-title {
+        @apply text-2xl font-semibold tracking-tight sm:text-3xl;
+    }
+
+    .card {
+        @apply rounded-xl border border-one-dark-line bg-one-dark-bg/40;
+    }
+
+    .card-link {
+        @apply card relative transition duration-200 hover:-translate-y-0.5 hover:border-one-dark-gray/70 active:translate-y-0;
+    }
+
+    /* Spotlight that follows the cursor (--x/--y set in main.js): a lit border ring + faint surface sheen */
+    .card-link::before,
+    .card-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .card-link::before {
+        padding: 1px;
+        background: radial-gradient(18rem circle at var(--x, 50%) var(--y, 50%), rgb(255 255 255 / 0.4), transparent 60%);
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    }
+
+    .card-link::after {
+        background: radial-gradient(24rem circle at var(--x, 50%) var(--y, 50%), rgb(255 255 255 / 0.05), transparent 50%);
+    }
+
+    .card-link:hover::before,
+    .card-link:hover::after {
+        opacity: 1;
+    }
+
+    .link {
+        @apply text-one-dark-white underline decoration-one-dark-gray underline-offset-4 transition-colors hover:text-one-dark-blue hover:decoration-one-dark-blue;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center rounded-lg bg-one-dark-white px-4 py-2 text-sm font-medium text-one-dark-deep transition hover:bg-one-dark-blue active:scale-[.98];
+    }
+
+    .skeleton {
+        @apply animate-pulse rounded-md bg-one-dark-bg;
+    }
+}
+
 @layer utilities {
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
@@ -12,4 +117,22 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
   }
+}
+
+/* Sections ease in as they scroll into view; browsers without scroll timelines just show them */
+@media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+        main section {
+            animation: reveal linear both;
+            animation-timeline: view();
+            animation-range: entry 0% entry 25%;
+        }
+    }
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
 }

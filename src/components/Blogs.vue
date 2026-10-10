@@ -1,105 +1,56 @@
 <template>
-    <div>
-        <h2 class="mb-3 font-black text-2xl">~/blogs/</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-            <div v-if="!fetchedJson.length">Blogs could not be retrieved.</div>
-            <a
-                v-bind:key="blog.index"
-                v-for="blog in fetchedJson.slice(0, 4)"
-                :href="blog.link"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex flex-col px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm"
-            >
-                <!-- Blog Image (always on top) -->
-                <div
-                    v-lazy-container="{ selector: 'img' }"
-                    class="flex-shrink-0 w-full mb-3"
-                >
-                    <img
-                        :data-src="getBlogImage(blog) || profileImage"
-                        class="rounded w-full lg:h-32 h-full object-contain lg:object-cover"
-                        :alt="blog.title"
-                    />
-                </div>
-
-                <!-- Blog Details (below image) -->
-                <div class="flex-grow overflow-hidden">
-                    <!-- Blog Title -->
-                    <div
-                        :class="['font-sans font-black', 'font-bold']"
-                        class="whitespace-normal break-words mb-3 lg:text-xl text-lg"
-                    >
-                        {{ blog.title }}
-                    </div>
-
-                    <!-- Author, Published Date and Profile Image -->
-                    <div
-                        v-lazy-container="{ selector: 'img' }"
-                        class="flex items-center gap-2 text-one-dark-foreground mb-3"
-                    >
-                        <img
-                            :data-src="profileImage"
-                            class="rounded-full w-7 h-7"
-                            alt="medium-profile"
-                        />
-                        <span class="truncate font-sans text-xs">
-                            {{ blog.author }}
-                            <br />
-                            {{
-                                new Date(blog.pubDate).toLocaleString("en-GB", {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                    hour: "numeric",
-                                    minute: "numeric",
-                                })
-                            }}
-                        </span>
-                    </div>
-
-                    <!-- Blog Tags -->
-                    <div class="flex flex-wrap gap-2 mt-3">
-                        <div
-                            v-for="tag in blog.categories"
-                            :key="tag.index"
-                            class="text-xs text-one-dark-blue"
-                        >
-                            #{{ tag }}
-                        </div>
-                    </div>
-                </div>
-            </a>
+    <section>
+        <div class="mb-8 flex items-end justify-between gap-4">
+            <div>
+                <p class="section-label"><span class="text-one-dark-blue">~/</span>writing</p>
+                <h2 class="section-title">Notes &amp; articles</h2>
+            </div>
+            <a href="https://medium.com/@wahyuivan" target="_blank" rel="noopener noreferrer"
+                class="link shrink-0 text-sm">All posts ↗</a>
         </div>
-    </div>
+        <ul v-if="state === 'loading'" class="space-y-6 border-y border-one-dark-line py-5" aria-busy="true">
+            <li v-for="n in 4" :key="n" class="skeleton h-5" :style="{ width: `${90 - n * 12}%` }"></li>
+        </ul>
+        <p v-else-if="state === 'error'" class="text-sm text-one-dark-foreground">
+            Couldn't load posts from Medium.
+            <a href="https://medium.com/@wahyuivan" target="_blank" rel="noopener noreferrer" class="link">Read them
+                there</a>.
+        </p>
+        <ul v-else class="divide-y divide-one-dark-line border-y border-one-dark-line">
+            <li v-for="blog in posts" :key="blog.link">
+                <a :href="blog.link" target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <span class="text-pretty font-medium transition-colors group-hover:text-one-dark-blue">
+                        {{ decode(blog.title) }}
+                    </span>
+                    <span class="shrink-0 font-mono text-xs tabular-nums text-one-dark-foreground">
+                        {{ formatDate(blog.pubDate) }}
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { MediumArticles } from "medium-article-api";
+import { fetchPosts, loadFeed } from "../lib/feeds.js";
 
-const mediumArticles = MediumArticles();
-const username = "@wahyuivan";
-const fetchedJson = ref([]); // Initialize the fetchedJson as an empty array
-const profileImage = ref(""); // Initialize the profileImage as an empty string
+const posts = ref([]);
+const state = ref("loading");
+
+// Medium titles arrive HTML-escaped (e.g. "&amp;")
+const decode = (html) => new DOMParser().parseFromString(html, "text/html").documentElement.textContent;
+
+const formatDate = (date) =>
+    new Date(date).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "numeric" });
 
 onMounted(async () => {
     try {
-        const data = await mediumArticles.getData(username); // Fetch the data
-        const profileImageUrl = await mediumArticles.getProfileImageUrl(
-            username
-        ); // Fetch the profile image URL
-        fetchedJson.value = data.items; // Assign the fetched data to fetchedJson
-        profileImage.value = profileImageUrl; // Assign the profile image URL to profileImage
+        posts.value = await loadFeed("posts", fetchPosts);
+        state.value = posts.value.length ? "ok" : "error";
     } catch (error) {
-        // Optionally, you can set a message to indicate the error
-        fetchedJson.value = []; // Set to empty if there's an error
+        state.value = "error";
     }
 });
-
-const getBlogImage = (blog) => {
-    const description = blog["description"] || "";
-    const imgMatch = description.match(/<img[^>]+src="([^">]+)"/);
-    return imgMatch ? imgMatch[1] : null; // Return the first image URL, or null if no image
-};
 </script>

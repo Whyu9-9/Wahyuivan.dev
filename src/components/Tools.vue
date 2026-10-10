@@ -1,81 +1,58 @@
 <template>
-    <div>
-        <h2 class="mb-3 font-black text-2xl">~/tools/</h2>
-        <div
-            class="bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm pt-5 px-5 pb-3"
-        >
-            <div
-                class="grid md:grid-cols-2 gap-3 md:gap-10 text-one-dark-foreground"
-            >
-                <div class="mb-2">
-                    <div class="font-black text-sm mb-4">/stacks/</div>
-                    <div
-                        class="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3"
-                    >
-                        <img
-                            v-for="(icon, index) in stackIcons"
-                            :key="index"
-                            :src="icon.src"
-                            :alt="icon.name"
-                            loading="lazy"
-                            decoding="async"
-                            width="48"
-                            height="48"
-                            class="h-12 w-12 object-contain"
-                        />
-                    </div>
-                </div>
-                <div class="mb-2">
-                    <div class="font-black text-sm mb-4">/services/</div>
-                    <div
-                        class="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3"
-                    >
-                        <img
-                            v-for="(icon, index) in serviceIcons"
-                            :key="index"
-                            :src="icon.src"
-                            :alt="icon.name"
-                            loading="lazy"
-                            decoding="async"
-                            width="48"
-                            height="48"
-                            class="h-12 w-12 object-contain"
-                        />
-                    </div>
-                </div>
+    <section>
+        <div class="mb-8">
+            <p class="section-label"><span class="text-one-dark-blue">~/</span>tools</p>
+            <h2 class="section-title">Tools I reach for</h2>
+        </div>
+        <div class="space-y-6">
+            <div v-for="group in groups" :key="group.label">
+                <h3 class="mb-3 text-sm text-one-dark-foreground">{{ group.label }}</h3>
+                <ul class="flex flex-wrap gap-2">
+                    <li v-for="icon in group.icons" :key="icon.name"
+                        class="group flex items-center gap-2 rounded-lg border border-one-dark-line bg-one-dark-bg/40 px-3 py-1.5 text-sm text-one-dark-foreground transition-colors hover:border-one-dark-gray hover:text-one-dark-white">
+                        <img :src="icon.src" alt="" loading="lazy" decoding="async" width="16" height="16"
+                            class="h-4 w-4 object-contain" />
+                        {{ icon.name }}
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 <script setup>
 import android from "devicon/icons/android/android-plain.svg";
 import bootstrap from "devicon/icons/bootstrap/bootstrap-original.svg";
-import css3 from "devicon/icons/css3/css3-plain-wordmark.svg";
+import css3 from "devicon/icons/css3/css3-plain.svg";
 import git from "devicon/icons/git/git-plain.svg";
 import go from "devicon/icons/go/go-original.svg";
-import html5 from "devicon/icons/html5/html5-plain-wordmark.svg";
-import java from "devicon/icons/java/java-plain-wordmark.svg";
+import html5 from "devicon/icons/html5/html5-plain.svg";
+import java from "devicon/icons/java/java-plain.svg";
 import javascript from "devicon/icons/javascript/javascript-plain.svg";
-import jquery from "devicon/icons/jquery/jquery-plain-wordmark.svg";
+import jquery from "devicon/icons/jquery/jquery-plain.svg";
 import kotlin from "devicon/icons/kotlin/kotlin-plain.svg";
-import mysql from "devicon/icons/mysql/mysql-plain-wordmark.svg";
-import nodejs from "devicon/icons/nodejs/nodejs-plain-wordmark.svg";
+import mysql from "../assets/icons/mysql.svg";
+import nodejs from "devicon/icons/nodejs/nodejs-plain.svg";
 import postgresql from "devicon/icons/postgresql/postgresql-plain.svg";
 import python from "devicon/icons/python/python-plain.svg";
 import react from "devicon/icons/react/react-original.svg";
-import ruby from "devicon/icons/ruby/ruby-plain-wordmark.svg";
+import ruby from "devicon/icons/ruby/ruby-plain.svg";
 import sqlite from "devicon/icons/sqlite/sqlite-original.svg";
 import typescript from "devicon/icons/typescript/typescript-plain.svg";
 import vuejs from "devicon/icons/vuejs/vuejs-original.svg";
 import laravel from "devicon/icons/laravel/laravel-original.svg";
 import php from "devicon/icons/php/php-original.svg";
-import githubWordmark from "devicon/icons/github/github-original-wordmark.svg";
+import github from "../assets/icons/github.svg";
 import googlecloud from "devicon/icons/googlecloud/googlecloud-plain.svg";
 import firebase from "devicon/icons/firebase/firebase-plain.svg";
 import bitbucket from "devicon/icons/bitbucket/bitbucket-original.svg";
 import cloudflare from "devicon/icons/cloudflare/cloudflare-original.svg";
 import aws from "devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg";
 import appwrite from "devicon/icons/appwrite/appwrite-original.svg";
+import claude from "../assets/ai/claude.svg";
+import chatgpt from "../assets/ai/chatgpt.svg";
+import gemini from "../assets/ai/gemini.svg";
+import deepseek from "../assets/ai/deepseek.svg";
+import glm from "../assets/ai/glm.svg";
 
 const stackIcons = [
     { src: android, name: "Android" },
@@ -101,12 +78,24 @@ const stackIcons = [
     { src: php, name: "PHP" },
 ];
 const serviceIcons = [
-    { src: githubWordmark, name: "GitHub" },
+    { src: github, name: "GitHub" },
     { src: googlecloud, name: "Google Cloud" },
     { src: firebase, name: "Firebase" },
     { src: bitbucket, name: "Bitbucket" },
     { src: cloudflare, name: "Cloudflare" },
     { src: aws, name: "Amazon Web Services" },
     { src: appwrite, name: "Appwrite" },
+];
+const aiIcons = [
+    { src: claude, name: "Claude" },
+    { src: chatgpt, name: "ChatGPT" },
+    { src: gemini, name: "Gemini" },
+    { src: deepseek, name: "DeepSeek" },
+    { src: glm, name: "Z.ai" },
+];
+const groups = [
+    { label: "Languages & frameworks", icons: stackIcons },
+    { label: "Platforms & services", icons: serviceIcons },
+    { label: "AI", icons: aiIcons },
 ];
 </script>

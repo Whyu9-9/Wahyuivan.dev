@@ -1,140 +1,86 @@
 <template>
-    <div>
-        <h2 class="mb-3 font-black text-2xl">~/repositories/</h2>
-        <div
-            class="no-scrollbar relative md:flex justify-center items-center bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg mb-4 overflow-scroll hidden p-5 w-full">
-            <img :src="githubIcon" alt="GitHub" width="24" height="24" loading="lazy" decoding="async"
-                class="absolute top-2 left-2 h-6 w-6 m-3" />
-            <ActivityCalendarWidget :data="convertedData" :daysToRender="daysToRender" />
+    <section>
+        <div class="mb-8 flex items-end justify-between gap-4">
+            <div>
+                <p class="section-label"><span class="text-one-dark-blue">~/</span>open-source</p>
+                <h2 class="section-title">Things I build in public</h2>
+            </div>
+            <a href="https://github.com/Whyu9-9" target="_blank" rel="noopener noreferrer"
+                class="link shrink-0 text-sm">GitHub ↗</a>
         </div>
-        <div class="grid md:grid-cols-2 gap-4">
-            <div v-if="!repos.length">Github repos could not be retrieved.</div>
-            <a v-bind:key="repo.html_url" v-for="repo in repos" :href="repo.html_url" target="_blank"
-                rel="noopener noreferrer"
-                class="flex flex-col justify-between px-5 py-3 bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm">
+        <div class="card no-scrollbar mb-4 hidden w-full justify-center overflow-scroll p-6 md:flex">
+            <ActivityCalendarWidget :data="convertedData" :daysToRender="daysToRender" :levelColors="levelColors"
+                tooltipBgColor="#21252b" />
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+            <template v-if="state === 'loading'">
+                <div v-for="n in 4" :key="n" class="skeleton h-32 rounded-xl"></div>
+            </template>
+            <p v-else-if="state === 'error'" class="text-sm text-one-dark-foreground">
+                Couldn't load repositories from GitHub.
+            </p>
+            <template v-else>
+            <a v-for="repo in repos" :key="repo.html_url" :href="repo.html_url" target="_blank"
+                rel="noopener noreferrer" class="card-link group flex flex-col justify-between p-5">
                 <div>
-                    <div v-lazy-container="{ selector: 'img' }"
-                        class="flex items-center gap-2 text-one-dark-foreground">
-                        <img :data-src="repo.owner.avatar_url" class="rounded-full w-4 h-4" alt="github-profile"
-                            fetchpriority="low" loading="lazy" as="image" />
-                        {{ repo.owner.login }}
-                    </div>
-                    <div :class="[
-                        'font-bold',
-                        'md:text-lg',
-                        'text-md',
-                        'mb-2',
-                        'mt-2',
-                        repo.archived ? 'line-through' : '',
+                    <h3 :class="[
+                        'font-mono text-sm font-medium transition-colors group-hover:text-one-dark-blue',
+                        repo.archived && 'line-through',
                     ]">
-                        <img :src="githubIcon" alt="GitHub" width="16" height="16" loading="lazy" decoding="async"
-                            class="inline-block h-4 w-4 align-text-bottom" />&nbsp;{{
-                            repo.name
-                        }}
-                    </div>
-                    <div class="text-xs text-one-dark-foreground">
+                        {{ repo.name }}
+                    </h3>
+                    <p class="mt-2 text-sm leading-relaxed text-one-dark-foreground">
                         {{ repo.description }}
-                    </div>
+                    </p>
                 </div>
-                <div class="flex mt-5 gap-5">
-                    <div>
-                        <font-awesome-icon :icon="['fas', 'star']" style="color: gold" />
-                        {{ repo.stargazers_count }}
-                    </div>
-                    <div>
-                        <font-awesome-icon :icon="['fas', 'code-branch']" class="text-one-dark-orange" />
-                        {{ repo.forks_count }}
-                    </div>
+                <div class="mt-5 flex gap-4 font-mono text-xs tabular-nums text-one-dark-foreground">
+                    <span><Icon :icon="['fas', 'star']" class="mr-1" />{{ repo.stargazers_count }}</span>
+                    <span><Icon :icon="['fas', 'code-branch']" class="mr-1" />{{ repo.forks_count }}</span>
                 </div>
             </a>
+            </template>
         </div>
-    </div>
+    </section>
 </template>
 <script setup>
-import { ref, onMounted, watch, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import ActivityCalendarWidget from "activity-calendar-widget/vue";
-import githubIcon from "devicon/icons/github/github-original.svg";
+import { fetchGithub, loadFeed } from "../lib/feeds.js";
 
-const projects = [
-    "MyGram-API",
-    "Open-Music-API",
-    "ElysiaBlogAPI",
-    "ChromeBuiltInAISimpleDemo",
-];
+// One Dark tones so empty days don't glow white on the dark page
+const levelColors = ["#2c313a", "#98c37940", "#98c37980", "#98c379bf", "#98c379"];
 const repos = ref([]);
-const contributions = ref([]);
+const state = ref("loading");
 const convertedData = ref([]);
 
-const daysToRender = ref(300); // Default value
-
+// The calendar only renders from md (768px) up
+const daysToRender = ref(300);
 const updateDaysToRender = () => {
-    const width = window.innerWidth;
+    daysToRender.value = window.innerWidth < 1024 ? 250 : 300;
+};
 
-    if (width < 640) {
-        // Small screens
-        daysToRender.value = 70; // Show fewer days
-    } else if (width < 768) {
-        // Medium screens
-        daysToRender.value = 200; // Show moderate days
-    } else if (width < 1024) {
-        // Large screens
-        daysToRender.value = 250; // Show more days
-    } else {
-        daysToRender.value = 300; // Default value for larger screens
+const load = async () => {
+    try {
+        const { repos: pinned, contributions } = await loadFeed("github", fetchGithub);
+        repos.value = pinned;
+        state.value = pinned.length ? "ok" : "error";
+        // Convert to the ActivityCalendarWidget format
+        convertedData.value = contributions.map(({ date, count }) => ({
+            date,
+            activities: Array(count).fill({}),
+        }));
+    } catch (error) {
+        console.warn("Error fetching GitHub data:", error);
+        state.value = "error";
     }
 };
 
-onMounted(async () => {
-    // Initial call
+onMounted(() => {
     updateDaysToRender();
-
-    // Update daysToRender on resize
     window.addEventListener("resize", updateDaysToRender);
-
-    try {
-        // Fetch contributions data
-        const contributionsResponse = await fetch(
-            "https://github-contributions-api.jogruber.de/v4/Whyu9-9?y=last"
-        );
-
-        if (!contributionsResponse.ok) {
-            throw new Error(`Contributions API error: ${contributionsResponse.status}`);
-        }
-
-        const contributionsData = await contributionsResponse.json();
-        contributions.value = contributionsData.contributions;
-
-        // Convert the fetched data to match ActivityCalendarWidget format
-        convertedData.value = contributions.value.map((contribution) => {
-            return {
-                date: contribution.date,
-                activities: Array(contribution.count).fill({}),
-            };
-        });
-    } catch (error) {
-        console.warn("Error fetching contributions:", error);
-        convertedData.value = [];
-    }
-
-    try {
-        // Fetch repositories data
-        const reposResponse = await fetch("https://api.github.com/users/Whyu9-9/repos?per_page=999");
-
-        if (!reposResponse.ok) {
-            throw new Error(`GitHub API error: ${reposResponse.status}`);
-        }
-
-        const reposData = await reposResponse.json();
-        repos.value = reposData.filter((repo) => projects.includes(repo.name));
-    } catch (error) {
-        console.warn("Error fetching repositories:", error);
-        repos.value = [];
-    }
+    load();
 });
 
-watch(() => window.innerWidth, updateDaysToRender); // Watch for window width changes
-
-// Clean up the event listener on component unmount
 onUnmounted(() => {
     window.removeEventListener("resize", updateDaysToRender);
 });

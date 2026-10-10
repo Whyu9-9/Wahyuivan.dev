@@ -9,10 +9,14 @@ export default {
   ],
   theme: {
     fontFamily: {
-      sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-      mono: ['"JetBrains Mono"', ...defaultTheme.fontFamily.mono],
+      sans: ['"Geist"', ...defaultTheme.fontFamily.sans],
+      mono: ['"Geist Mono"', ...defaultTheme.fontFamily.mono],
     },
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'one-dark-deep': '#1d2026',      // Page background
+      'one-dark-line': '#323843',      // Hairline borders
       'one-dark-bg': '#282c34',        // Background color
       'one-dark-foreground': '#abb2bf', // Foreground color (text)
       'one-dark-white': '#ffffff',      // White color for high contrast
@@ -25,16 +29,7 @@ export default {
       'one-dark-yellow': '#e5c07b',     // Yellow color for syntax highlighting
       'one-dark-gray': '#5c6370',       // Dark gray for comments and borders
     },
-    extend: {
-      screens: {
-        'too-small-min': {
-          'min': '340px'
-        },
-        'too-small-max': {
-          'max': '340px'
-        }
-      },
-    },
+    extend: {},
   },
   plugins: [],
 }

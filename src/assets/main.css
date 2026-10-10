@@ -1,6 +1,6 @@
 @import "./base.css";
 
 ::selection {
-    background: theme("colors.one-dark-bg");
-    color: theme("colors.one-dark-white");
+    background: theme("colors.one-dark-blue");
+    color: theme("colors.one-dark-deep");
 }

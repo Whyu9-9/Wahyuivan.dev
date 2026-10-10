@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>🚀 Wahyu Ivan - Personal Website</title>
+        <title>Wahyu Ivan · Frontend Developer</title>
         <link
             rel="icon"
             href="https://wahyuivan.dev/favicon.png"
@@ -113,44 +113,27 @@
             rel="preload"
             href="https://storage.wahyuivan.dev/profile.webp"
             as="image"
-        />
-        <link
-            rel="preload"
-            href="https://storage.wahyuivan.dev/Screenshot%202024-10-06%20at%2010.11.37.webp"
-            as="image"
+            media="(min-width: 768px)"
         />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
             rel="preconnect"
-            href="https://fonts.googleapis.com"
+            href="https://fonts.gstatic.com"
             crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap"
         />
     </head>
 
     <body
-        class="overflow-x-hidden bg-one-dark-bg text-one-dark-white font-mono"
+        class="overflow-x-hidden"
     >
         <div id="app"></div>
         <script type="module" src="/src/main.js"></script>
 
-        <!-- Service Worker Registration -->
-        <script>
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", () => {
-                    navigator.serviceWorker
-                        .register("/sw.js")
-                        .then((registration) => {
-                            console.log("SW registered: ", registration);
-                        })
-                        .catch((registrationError) => {
-                            console.log(
-                                "SW registration failed: ",
-                                registrationError
-                            );
-                        });
-                });
-            }
-        </script>
 
         <!-- WebMCP: expose portfolio tools to AI agents in supporting browsers -->
         <script>

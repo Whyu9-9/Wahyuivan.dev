@@ -1,62 +1,33 @@
 <template>
-    <div>
-        <h2 class="mb-3 font-black text-2xl">~/experiences/</h2>
-        <div
-            class="mx-auto py-10 relative bg-[#202020]/[.3] border-[#504945] border-[0.5px] rounded-lg text-sm pt-9 px-5 pb-0 overflow-hidden">
-            <!-- Vertical snake line -->
-            <div
-                class="absolute left-1/2 transform -translate-x-1/2 w-[2px] h-full bg-one-dark-gray top-0 hidden md:block">
-            </div>
-
-            <div v-for="(experience, index) in experiences.slice().reverse()" :key="index">
-                <!-- Odd Index - Timeline Item Right -->
-                <div v-if="index % 2 === 0" class="mb-8 flex items-center justify-start md:mb-14">
-                    <div class="w-full md:w-1/2 text-left pl-6 pr-6 md:text-right">
-                        <h3 class="font-bold text-2xl font-sans">
-                            {{ experience.title }}
-                        </h3>
-                        <p class="text-xs text-one-dark-foreground font-sans md:text-sm">
-                            <a class="text-one-dark-blue font-bold" :href="experience.companyWebsite"
-                                rel="noopener noreferrer">{{ experience.company }}</a>,
-                            {{ experience.period }}
-                        </p>
-                        <p class="mt-2 text-one-dark-foreground text-xs hidden md:block">
-                            {{ experience.description }}
-                        </p>
-                    </div>
-                    <div :class="index !== 0
-                        ? 'bg-one-dark-red'
-                        : 'bg-one-dark-green'
-                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-ml-4"></div>
-                </div>
-
-                <!-- Even Index - Timeline Item Left -->
-                <div v-else class="mb-8 flex items-center justify-end md:mb-14">
-                    <div :class="index !== 0
-                        ? 'bg-one-dark-red'
-                        : 'bg-one-dark-green'
-                        " class="w-8 h-8 rounded-full border-4 border-one-dark-bg z-0 hidden md:block md:-mr-4"></div>
-                    <div class="w-full md:w-1/2 text-left pl-6 pr-6">
-                        <h3 class="font-bold text-xl font-sans">
-                            {{ experience.title }}
-                        </h3>
-                        <p class="text-xs text-one-dark-foreground font-sans md:text-sm">
-                            <a class="text-one-dark-blue font-bold" :href="experience.companyWebsite"
-                                rel="noopener noreferrer">{{ experience.company }}</a>, {{ experience.period }}
-                        </p>
-                        <p class="mt-2 text-one-dark-foreground text-xs hidden md:block">
-                            {{ experience.description }}
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <section>
+        <div class="mb-8">
+            <p class="section-label"><span class="text-one-dark-blue">~/</span>experience</p>
+            <h2 class="section-title">Where I've worked</h2>
         </div>
-    </div>
+        <ol class="divide-y divide-one-dark-line border-y border-one-dark-line">
+            <li v-for="experience in [...experiences].reverse()" :key="experience.company"
+                class="grid gap-1 py-5 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                <span class="pt-0.5 font-mono text-xs tabular-nums text-one-dark-foreground">
+                    {{ experience.period }}
+                </span>
+                <div>
+                    <h3 class="font-medium">
+                        <span v-if="experience.period.includes('Present')"
+                            class="mr-2 rounded bg-one-dark-green/15 px-1.5 py-0.5 align-middle font-mono text-[11px] text-one-dark-green">Now</span>
+                        {{ experience.title }}
+                        <span class="text-one-dark-foreground"> · </span>
+                        <a :href="experience.companyWebsite" target="_blank" rel="noopener noreferrer" class="link">{{
+                            experience.company }}</a>
+                    </h3>
+                    <p class="mt-1 max-w-prose text-sm leading-relaxed text-one-dark-foreground">
+                        {{ experience.description }}
+                    </p>
+                </div>
+            </li>
+        </ol>
+    </section>
 </template>
-
 <script setup>
-import { ref } from "vue";
-
 const experiences = [
     {
         title: "Backend Web Developer Intern",

@@ -1,41 +1,13 @@
-const CACHE_NAME = 'wahyu-portfolio-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    '/src/assets/main.css',
-    '/src/assets/base.css',
-    '/src/assets/bg.css',
-    'https://storage.wahyuivan.dev/profile.webp',
-    'https://storage.wahyuivan.dev/Screenshot%202024-10-06%20at%2010.11.37.webp'
-];
-
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => cache.addAll(urlsToCache))
-    );
-});
-
-self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Return cached version or fetch from network
-                return response || fetch(event.request);
-            })
-    );
-});
+// Kill switch: the old cache-first worker could pin visitors to a stale index.html.
+// Browsers that still have it registered fetch this file, which clears every cache and unregisters itself.
+self.addEventListener('install', () => self.skipWaiting());
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
-    );
-}); 
+    event.waitUntil((async () => {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((key) => caches.delete(key)));
+        await self.registration.unregister();
+        const clients = await self.clients.matchAll({ type: 'window' });
+        clients.forEach((client) => client.navigate(client.url));
+    })());
+});

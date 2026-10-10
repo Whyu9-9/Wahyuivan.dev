@@ -1,0 +1,15 @@
+{
+  "issuer": "https://wahyuivan.dev",
+  "registration_endpoint": null,
+  "grant_types_supported": [],
+  "scopes_supported": [],
+  "agent_auth": {
+    "register_uri": null,
+    "identity_types_supported": [],
+    "credential_types_supported": [],
+    "claims_endpoint": null,
+    "revocation_endpoint": null,
+    "note": "No agent registration is supported or required."
+  },
+  "note": "This is a public portfolio with no protected APIs. No authentication or agent registration is required."
+}
