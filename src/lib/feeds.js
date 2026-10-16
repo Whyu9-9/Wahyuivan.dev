@@ -47,7 +47,13 @@ export const fetchPosts = async () => {
 // Production reads through the cached Pages Function; dev hits the source directly (functions don't run in Vite).
 export const loadFeed = async (feed, loader) => {
     if (import.meta.env?.DEV) return loader();
-    const response = await fetch(`/api/${feed}`);
-    if (!response.ok) throw new Error(`/api/${feed} responded ${response.status}`);
-    return response.json();
+    try {
+        const response = await fetch(`/api/${feed}`);
+        if (!response.ok) throw new Error(`/api/${feed} responded ${response.status}`);
+        return await response.json();
+    } catch (error) {
+        // Cloudflare's shared IPs often hit GitHub's anonymous rate limit; the visitor's own IP has a separate quota
+        console.warn(`/api/${feed} failed, fetching directly:`, error);
+        return loader();
+    }
 };
