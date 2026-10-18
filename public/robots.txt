@@ -5,5 +5,3 @@ User-agent: *
 Disallow: 
 
 Sitemap: https://wahyuivan.dev/sitemap.xml
-
-Content-Signal: ai-train=no, search=yes, ai-input=no

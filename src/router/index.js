@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter as createVueRouter } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import NotFound from '../components/NotFound.vue';
 
@@ -15,9 +15,5 @@ const routes = [
     },
 ];
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-});
-
-export default router;
+// History is passed in: web history in the browser, memory history when prerendering
+export const createRouter = (history) => createVueRouter({ history, routes });

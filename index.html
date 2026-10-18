@@ -94,12 +94,8 @@
             }
         </script>
 
-        <!-- Google tag (gtag.js) -->
-        <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-GV389BWWWW"
-        ></script>
-        <script defer>
+        <!-- Google tag (gtag.js), fetched after load so its ~180 KB doesn't compete with first paint -->
+        <script>
             window.dataLayer = window.dataLayer || [];
             function gtag() {
                 dataLayer.push(arguments);
@@ -107,6 +103,12 @@
             gtag("js", new Date());
 
             gtag("config", "G-GV389BWWWW");
+
+            addEventListener("load", () => {
+                const tag = document.createElement("script");
+                tag.src = "https://www.googletagmanager.com/gtag/js?id=G-GV389BWWWW";
+                document.head.append(tag);
+            });
         </script>
 
         <link
@@ -115,7 +117,6 @@
             as="image"
             media="(min-width: 768px)"
         />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
             rel="preconnect"

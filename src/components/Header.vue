@@ -82,7 +82,8 @@ const ws = ref(null);
 const presence = ref("offline");
 const vscode = ref(null);
 const cursor = ref(null);
-const now = ref(Date.now());
+// Null until mounted so the prerendered HTML has no stale build-time clock
+const now = ref(null);
 let clock = null;
 const reconnectAttempts = ref(0);
 const maxReconnectAttempts = 5;
@@ -171,6 +172,7 @@ const connectWebSocket = () => {
 
 onMounted(async () => {
     connectWebSocket();
+    now.value = Date.now();
     // Ticks the local clock and the "coding for" duration
     clock = setInterval(() => (now.value = Date.now()), 30_000);
 });
@@ -212,7 +214,7 @@ const activity = computed(() => vscode.value || cursor.value);
 const activityApp = computed(() => (vscode.value ? "VS Code" : "Cursor"));
 
 const baliTime = computed(() =>
-    new Date(now.value).toLocaleTimeString("en-GB", {
+    now.value === null ? "--:--" : new Date(now.value).toLocaleTimeString("en-GB", {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "Asia/Makassar",

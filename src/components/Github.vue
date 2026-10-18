@@ -8,8 +8,9 @@
             <a href="https://github.com/Whyu9-9" target="_blank" rel="noopener noreferrer"
                 class="link shrink-0 text-sm">GitHub ↗</a>
         </div>
-        <div class="card no-scrollbar mb-4 hidden w-full justify-center overflow-scroll p-6 md:flex">
-            <ActivityCalendarWidget :data="convertedData" :daysToRender="daysToRender" :levelColors="levelColors"
+        <!-- Client-only: prerendered it's ~100 KB of empty cells; min-h holds its 197px so nothing shifts -->
+        <div class="card no-scrollbar mb-4 hidden min-h-[197px] w-full justify-center overflow-scroll p-6 md:flex">
+            <ActivityCalendarWidget v-if="mounted" :data="convertedData" :daysToRender="daysToRender" :levelColors="levelColors"
                 tooltipBgColor="#21252b" />
         </div>
         <div class="grid gap-4 md:grid-cols-2">
@@ -52,6 +53,7 @@ const levelColors = ["#2c313a", "#98c37940", "#98c37980", "#98c379bf", "#98c379"
 const repos = ref([]);
 const state = ref("loading");
 const convertedData = ref([]);
+const mounted = ref(false);
 
 // The calendar only renders from md (768px) up
 const daysToRender = ref(300);
@@ -76,6 +78,7 @@ const load = async () => {
 };
 
 onMounted(() => {
+    mounted.value = true;
     updateDaysToRender();
     window.addEventListener("resize", updateDaysToRender);
     load();

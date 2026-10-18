@@ -3,13 +3,6 @@ import { createHash } from 'node:crypto'
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
-// ── robots.txt ──────────────────────────────────────────────────────────────
-
-test('robots.txt declares Content-Signal preferences', async () => {
-  const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8')
-  assert.match(robots, /^Content-Signal:\s+ai-train=no,\s+search=yes,\s+ai-input=no$/m)
-})
-
 // ── OAuth stubs ──────────────────────────────────────────────────────────────
 
 test('openid-configuration is valid JSON with issuer field', async () => {

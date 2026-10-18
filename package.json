@@ -5,9 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && vite build --ssr src/entry-server.js --outDir dist-ssr && node scripts/prerender.js",
         "preview": "vite preview",
-        "build:deploy": "npm install && vite build",
+        "build:deploy": "npm install && npm run build",
         "test": "node --test test/*.test.js"
     },
     "dependencies": {

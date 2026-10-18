@@ -1,10 +1,7 @@
 import './assets/main.css';
 
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-
-import Icon from './components/Icon.vue';
+import { createWebHistory } from 'vue-router';
+import { createApp } from './app';
 
 // Error tracking
 window.addEventListener('error', (event) => {
@@ -36,7 +33,10 @@ document.addEventListener('pointermove', (event) => {
   card.style.setProperty('--y', `${event.clientY - rect.top}px`)
 }, { passive: true })
 
-const app = createApp(App)
-app.use(router) // Use the router
-app.component('Icon', Icon)
-app.mount('#app')
+// Hydrates the HTML prerendered by scripts/prerender.js
+const { app, router } = createApp(createWebHistory())
+router.isReady().then(() => {
+  // Unknown paths get the home page's HTML as SPA fallback; drop it so the 404 view mounts fresh
+  if (router.currentRoute.value.name !== 'Home') document.getElementById('app').innerHTML = ''
+  app.mount('#app')
+})
