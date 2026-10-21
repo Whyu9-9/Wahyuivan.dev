@@ -14,6 +14,15 @@ export default defineConfig(({ isSsrBuild }) => ({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  server: {
+    proxy: {
+      '/medium-feed': {
+        target: 'https://medium.com',
+        changeOrigin: true,
+        rewrite: () => '/feed/@wahyuivan',
+      },
+    },
+  },
   build: {
     minify: 'esbuild',
     // Icons are lazy <img>s below the fold; inlining them bloated both the JS and the prerendered HTML

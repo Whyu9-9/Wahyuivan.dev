@@ -1,6 +1,5 @@
 // Loaders for the GitHub and Medium sections.
-// GitHub goes through the cached /api/github Pages Function in production; Medium is fetched from the browser
-// because rss2json rejects requests coming from Cloudflare's servers.
+// Both go through the cached /api/<feed> Pages Function in production.
 
 const GITHUB_USER = "Whyu9-9";
 const MEDIUM_USER = "wahyuivan";
@@ -37,11 +36,22 @@ export const fetchGithub = async ({ token } = {}) => {
     };
 };
 
+// Medium's feed has no CORS headers, so dev reads it through the Vite proxy in vite.config.js
+const MEDIUM_FEED = import.meta.env?.DEV ? "/medium-feed" : `https://medium.com/feed/@${MEDIUM_USER}`;
+
+// Text of the first <name> element, unwrapped from CDATA if present
+const tag = (xml, name) =>
+    xml.match(new RegExp(`<${name}>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?</${name}>`))?.[1].trim();
+
 export const fetchPosts = async () => {
-    const data = await getJson(
-        `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${MEDIUM_USER}`
-    );
-    return data.items.slice(0, 5).map(({ title, link, pubDate }) => ({ title, link, pubDate }));
+    const response = await fetch(MEDIUM_FEED, { headers: { "User-Agent": "wahyuivan.dev" } });
+    if (!response.ok) throw new Error(`${MEDIUM_FEED} responded ${response.status}`);
+    const items = (await response.text()).match(/<item>[\s\S]*?<\/item>/g) ?? [];
+    return items.slice(0, 5).map((item) => ({
+        title: tag(item, "title"),
+        link: tag(item, "link"),
+        pubDate: tag(item, "pubDate"),
+    }));
 };
 
 // Production reads through the cached Pages Function; dev hits the source directly (functions don't run in Vite).

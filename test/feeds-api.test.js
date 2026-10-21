@@ -86,3 +86,11 @@ test('unknown feed is a 404', async () => {
   assert.equal((await call('nope')).status, 404)
   assert.equal((await call('posts')).status, 404)
 })
+
+test('medium feed parses the RSS into the latest posts', async () => {
+  const item = (n) => `<item><title><![CDATA[Post ${n} & co]]></title><link>https://medium.com/p/${n}</link><pubDate>Wed, 21 Oct 2026 20:37:38 GMT</pubDate></item>`
+  upstream['medium.com'] = () => new Response(`<rss><channel><title><![CDATA[Stories]]></title>${[1, 2, 3, 4, 5, 6].map(item).join('')}</channel></rss>`)
+  const body = await (await call('medium')).json()
+  assert.equal(body.length, 5)
+  assert.deepEqual(body[0], { title: 'Post 1 & co', link: 'https://medium.com/p/1', pubDate: 'Wed, 21 Oct 2026 20:37:38 GMT' })
+})
